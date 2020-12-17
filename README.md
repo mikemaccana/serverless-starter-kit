@@ -1,13 +1,15 @@
 # Fullstack Serverless Starter Kit
 
-<img alt="logos" src="/public/images/logos.svg" style="margin: 0 auto;"/>
+<img alt="logos" src="/public/images/logos.svg"/>
 
- - [AWS SAM](https://aws.amazon.com/serverless/sam/), with the necessary `sam.yaml` files automatically created using [Architect Serverless](https://arc.codes). All lambdas, events etc use TypeScript.
- - [Svelte](https://svelte.dev/) using TypeScript
+ - [AWS SAM](https://aws.amazon.com/serverless/sam/)
+ - Ne need to create `sam.yaml` files manually - [Architect Serverless](https://arc.codes) generates them for you. See `arc` in the `package.json` to see the input!
+ - Pure ES2017 `await` style code without callbacks for routes or middleware - Arc lambdas simply return responses, and middleware can be chained together by returning a response (ending processing) or a modified request (passing to the next step in middleware) 
+ - [Svelte](https://svelte.dev/) using TypeScript, for fast, simple and small code without the overhead of a virtual DOM.
  - [eslint using TypeScript](https://github.com/typescript-eslint/typescript-eslint)
  - tests using [TS jest](https://kulshekhar.github.io/ts-jest/)
- - Types for the Arc Request and Response objects
- - A `.env` for secrets
+ - Types for the Arc `Request` and `Response` objects
+ - An `.env` for secrets
  - A neat HTML5 view
  - Live Reloading
 
