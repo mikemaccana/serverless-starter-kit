@@ -41,7 +41,7 @@ export default {
     }),
     commonjs(),
     typescript({
-      tsconfig: "tsconfig-frontend.json",
+      tsconfig: "src/frontend/tsconfig.json",
       sourceMap: isDevelopment,
       inlineSources: isDevelopment,
     }),

@@ -23,8 +23,8 @@
     }
   },
   "scripts": {
-    "build-backend": "tsc -p tsconfig-backend.json",
-    "build-backend-watch": "tsc -p tsconfig-backend.json -w",
+    "build-backend": "tsc",
+    "build-backend-watch": "tsc -w",
     "build-frontend": "rollup -c",
     "build-frontend-watch": "rollup -c -w",
     "sandbox": "arc sandbox",
