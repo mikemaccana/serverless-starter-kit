@@ -1,9 +1,9 @@
 {
-  "name": "pr-chart",
+  "name": "typescript-serverless-starter-kit",
   "version": "1.0.0",
   "arc": {
-    "app": "pr-chart",
-    "description": "Show pull requests for a project visually",
+    "app": "typescript-serverless-starter-kit",
+    "description": "A demo TypeScript Serverless app using Architect and Svelte",
     "http": {
       "/": {
         "method": "get",
