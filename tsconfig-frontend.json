@@ -1,0 +1,9 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    // Default included above is es2017
+    "target": "es2019",
+  },
+  "include": ["src/frontend/**/*"],
+  "lib": ["es2019", "dom"],
+}
