@@ -1,6 +1,6 @@
 # Fullstack Serverless Starter Kit
 
- - AWS SAM, created using [Architect Serverless](https://arc.codes), using TypeScript
+ - [AWS SAM](https://aws.amazon.com/serverless/sam/), with the necessary `sam.yaml` files automatically created using [Architect Serverless](https://arc.codes). All lambdas, events etc use TypeScript.
  - [Svelte](https://svelte.dev/) using TypeScript
  - [eslint using TypeScript](https://github.com/typescript-eslint/typescript-eslint)
  - tests using [TS jest](https://kulshekhar.github.io/ts-jest/)

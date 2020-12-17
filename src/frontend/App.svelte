@@ -1,9 +1,11 @@
 <script lang="ts">
 	export let name: string;
+	const STATIC_DIR = "/_static";
 </script>
 
 <main>
 	<h1>Hello {name}</h1>
+	<img alt="logos" src="{STATIC_DIR}/images/logos.svg"/>
 </main>
 
 <style>
@@ -17,6 +19,7 @@
 	}
 
 	h1 {
+		margin: 0;
 		text-align: center;
 		color: #ff784b;
 		font-size: 96pt;
