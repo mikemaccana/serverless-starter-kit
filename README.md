@@ -29,27 +29,29 @@ Config is under `.env`, which is not committed for security reasons.
 ## LiveReloading 
 
 The browser will automatically reload when frontend assets are updated.
-## What's next:
+
+## Coming next:
 
  - Add SCSS
  - Add Mongo Atlas (would use AWS DocumentDB but that requires paying for a DocumentDB EC2 instance which is absurdly expensive)
+
+# How to use this repository
+
+## Clone it
+
+```bash
+npx degit mikemaccana/fullstack-serverless-starter-kit my-new-app
+cd my-new-app
+npm install
+npm start
+```
+
+The Arc sandbox is now running on http://localhost:3333
 ## Test
 
 ```bash
 npm test
 ```
-
-## Run locally
-
-The app needs a GitHub auth token specific to your account.
-
- - Copy `.env.example` to `.env`
- - [Get your own GitHub auth token](https://github.com/settings/tokens/new) and add the token to `.env`.
-
-```bash
-npm start
-```
-
 ## Deploy the code to AWS
 
 Set up your `~/.aws/credentials` and run:
