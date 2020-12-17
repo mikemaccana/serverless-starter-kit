@@ -1,6 +1,6 @@
 # Fullstack Serverless Starter Kit
 
-<img alt="logos" src="/public/images/logos.svg"/>
+<img alt="logos" src="/public/images/logos.svg" style="margin: 0 auto;"/>
 
  - [AWS SAM](https://aws.amazon.com/serverless/sam/), with the necessary `sam.yaml` files automatically created using [Architect Serverless](https://arc.codes). All lambdas, events etc use TypeScript.
  - [Svelte](https://svelte.dev/) using TypeScript
