@@ -2,11 +2,12 @@
 
  - AWS SAM, created using [Architect Serverless](https://arc.codes), using TypeScript
  - [Svelte](https://svelte.dev/) using TypeScript
- - eslint using TypeScript
- - tests using [TS jest
+ - [eslint using TypeScript](https://github.com/typescript-eslint/typescript-eslint)
+ - tests using [TS jest](https://kulshekhar.github.io/ts-jest/)
  - Types for the Arc Request and Response objects
- - A .env for secrets
+ - A `.env` for secrets
  - A neat HTML5 view
+ - Live Reloading
 
 ## Arc Serverless for easily creating Infrastructure as Code
 
@@ -23,10 +24,13 @@ Config is under `.env`, which is not committed for security reasons.
 
 `public` dir is mapped to `static` in each lambda.
 
+## LiveReloading 
+
+The browser will automatically reload when frontend assets are updated.
 ## What's next:
 
  - Add SCSS
- - Add Mongo Atlas (would use AWS DocumentDB but that requires paying for a DocumentDB instance which is absurdly expensive)
+ - Add Mongo Atlas (would use AWS DocumentDB but that requires paying for a DocumentDB EC2 instance which is absurdly expensive)
 ## Test
 
 ```bash
