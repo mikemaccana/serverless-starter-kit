@@ -12,6 +12,7 @@
 	main {
 		display: grid;
 		width: 100vw;
+		/* Stops the download bar (desktop) and the auto-hiding address bar (mobile) affecting the layout */
 		height: -webkit-fill-available;
 		align-content: center;
 		justify-items: center;
