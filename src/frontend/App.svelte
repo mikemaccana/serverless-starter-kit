@@ -1,11 +1,14 @@
 <script lang="ts">
 	export let name: string;
+	import Chat from "./Chat.svelte"
 	const STATIC_DIR = "/_static";
 </script>
 
 <main>
 	<h1>Hello {name}</h1>
 	<img alt="logos" src="{STATIC_DIR}/images/logos.svg"/>
+
+	<Chat />
 </main>
 
 <style>
