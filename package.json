@@ -10,8 +10,8 @@
         "src": "dist/http/get-index"
       },
       "/*": {
-        "method": "get",
-        "src": "dist/http/get-catchall"
+        "method": "any",
+        "src": "dist/http/any-catchall"
       }
     },
     "static": {
