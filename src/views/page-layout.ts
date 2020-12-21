@@ -29,7 +29,7 @@ export function layoutPage({
     ':35729/livereload.js?snipver=1"></' + 'script>')
 
       // Websocket URL
-      window.websocketURL = '${websocketURL}';
+      window.websocketURL = '${websocketURL ? websocketURL : null}';
     </script> 
   
     <script defer src='${STATIC_DIR}/build/bundle.js'></script>

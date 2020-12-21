@@ -6,6 +6,9 @@
   let websocketURL = (window as any).websocketURL;
 
   // setup the web socket
+  if ( websocketURL ) {
+    throw new Error(`window.websocketURL not specified`)
+  }
   let websocket = new WebSocket(websocketURL);
   websocket.onopen = open;
   websocket.onclose = close;
