@@ -1,10 +1,10 @@
 const STATIC_DIR = "/_static";
 
 export function layoutPage({
-  title,
+  title = "Fullstack Serverless Starter Kit",
   websocketURL,
 }: {
-  title: string;
+  title?: string;
   websocketURL: string;
 }): string {
   return `<!DOCTYPE html>

@@ -12,10 +12,9 @@ function getWebSocketURL() {
   return testing;
 }
 
-const TITLE = "Fullstack Serverless Starter Kit";
 const webSocketURL = getWebSocketURL();
 
-const html = layoutPage({ title: TITLE, websocketURL: webSocketURL });
+const html = layoutPage({ websocketURL: webSocketURL });
 
 export async function handler(request: Request): Promise<Response> {
   return {
