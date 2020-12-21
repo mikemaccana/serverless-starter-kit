@@ -7,7 +7,7 @@ import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 
-const isProduction = !process.env.NODE_ENV;
+const isProduction = process.env.NODE_ENV === "production";
 const isDevelopment = !isProduction;
 
 export default {
@@ -49,8 +49,7 @@ export default {
     // browser on changes when not in production
     livereload("public"),
 
-    // If we're building for production (npm run build
-    // instead of npm run dev), minify
+    // If we're building for production, minify
     isProduction && terser(),
   ],
   watch: {
