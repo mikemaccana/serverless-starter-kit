@@ -13,4 +13,7 @@ module.exports = {
     jest: true,
     node: true,
   },
+  rules: {
+    "@typescript-eslint/no-unused-vars": "off",
+  },
 };

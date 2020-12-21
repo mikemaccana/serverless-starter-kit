@@ -4,11 +4,11 @@ import arc from "@architect/functions";
 exports.handler = async function ws(event) {
   console.log("ws-default called with", event);
 
-  let timestamp = new Date().toISOString();
-  let connectionId = event.requestContext.connectionId;
-  let message = JSON.parse(event.body);
+  const timestamp = new Date().toISOString();
+  const connectionId = event.requestContext.connectionId;
+  const message = JSON.parse(event.body);
   // Reply with an echo and a timestamp
-  let text = `${timestamp} - Echoing ${message.text}`;
+  const text = `${timestamp} - Echoing ${message.text}`;
 
   await arc.ws.send({
     id: connectionId,

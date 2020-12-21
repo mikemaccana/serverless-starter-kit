@@ -3,10 +3,10 @@ import { STATUSES, CONTENT_TYPES, stringify, log } from "../../shared/utils";
 import { layoutPage } from "../../views/page-layout";
 
 function getWebSocketURL() {
-  let env = process.env.NODE_ENV;
-  let testing = "ws://localhost:3333";
-  let staging = "fixme: these urls are printed after create";
-  let production = "fixme: these urls are printed after create";
+  const env = process.env.NODE_ENV;
+  const testing = "ws://localhost:3333";
+  const staging = "fixme: these urls are printed after create";
+  const production = "fixme: these urls are printed after create";
   if (env === "staging") return staging;
   if (env === "production") return production;
   return testing;

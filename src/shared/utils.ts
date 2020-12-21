@@ -15,13 +15,13 @@ export const CONTENT_TYPES = {
 export async function asyncForEach<T>(
   array: T[],
   iterator: (item: T, index: number, array: T[]) => Promise<void>
-) {
+): Promise<void> {
   for (let index = 0; index < array.length; index++) {
     await iterator(array[index], index, array);
   }
 }
 
-export const wait = async (timeInMs: number) => {
+export const wait = async (timeInMs: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 };
 
@@ -42,15 +42,15 @@ export const log = console.log.bind(console);
 // eslint-disable-next-line no-console
 export const warn = console.warn.bind(console);
 
-export const stringify = (input: object): string => {
+export const stringify = (input: Record<string, unknown>): string => {
   return JSON.stringify(input, null, 2);
 };
 
-export function deepClone(obj: Object) {
+export function deepClone(obj: ObjectLiteral): ObjectLiteral {
   return JSON.parse(JSON.stringify(obj));
 }
 
-export const dateFromNow = function (adjustmentMs: number) {
+export const dateFromNow = function (adjustmentMs: number): Date {
   const now: number = new Date().valueOf();
   return new Date(now + adjustmentMs);
 };

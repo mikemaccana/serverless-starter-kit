@@ -2,23 +2,23 @@ import { ObjectLiteral } from "./utils";
 
 // https://arc.codes/primitives/http#req
 export interface Request {
-  version: String;
-  routeKey: String;
-  rawPath: String;
+  version: string;
+  routeKey: string;
+  rawPath: string;
   pathParameters?: ObjectLiteral;
-  rawQueryString: String;
-  queryStringParameters?: Object;
-  cookies?: String[];
+  rawQueryString: string;
+  queryStringParameters?: ObjectLiteral;
+  cookies?: string[];
   headers: ObjectLiteral;
   requestContext: ObjectLiteral;
-  body?: String;
-  isBase64Encoded: Boolean;
+  body?: string;
+  isBase64Encoded: boolean;
 }
 
 // https://arc.codes/primitives/http#res
 export interface Response {
-  statusCode: Number;
+  statusCode: number;
   headers?: ObjectLiteral;
-  body?: String | Buffer;
-  isBase64Encoded?: Boolean;
+  body?: string | Buffer;
+  isBase64Encoded?: boolean;
 }
