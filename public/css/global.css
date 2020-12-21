@@ -5,8 +5,10 @@ html {
   box-sizing: inherit;
 }
 
-div {
+div, body, .error {
 	display: grid;
+	justify-items: center;
+	align-items: center;
 }
 
 html, body {

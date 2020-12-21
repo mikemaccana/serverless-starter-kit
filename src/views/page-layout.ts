@@ -3,9 +3,12 @@ const STATIC_DIR = "/_static";
 export function layoutPage({
   title = "Fullstack Serverless Starter Kit",
   websocketURL,
+  // A simple message used for error pages
+  message,
 }: {
   title?: string;
-  websocketURL: string;
+  websocketURL?: string;
+  message?: string;
 }): string {
   return `<!DOCTYPE html>
   <html lang="en">
@@ -30,10 +33,12 @@ export function layoutPage({
     </script> 
   
     <script defer src='${STATIC_DIR}/build/bundle.js'></script>
+
         
   </head>
   
   <body>
+    ${message ? `<main><h1>${message}</h1></main>` : ""} 
     
   </body>
   </html>`;

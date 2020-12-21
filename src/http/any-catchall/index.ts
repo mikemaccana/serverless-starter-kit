@@ -5,6 +5,7 @@ import {
   ObjectLiteral,
   CONTENT_TYPES,
 } from "../../shared/utils";
+import { layoutPage } from "../../views/page-layout";
 
 export async function handler(request: Request): Promise<Response> {
   log(`Request to non-existent route ${request.rawPath}`);
@@ -13,6 +14,9 @@ export async function handler(request: Request): Promise<Response> {
     headers: {
       "Content-Type": CONTENT_TYPES.html,
     },
-    body: `<h1>Not found</h1>`,
+    body: layoutPage({
+      title: "Not found",
+      message: "Not found",
+    }),
   };
 }
