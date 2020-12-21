@@ -3,13 +3,13 @@
   import type ObjectLiteral from "./object-literal";
 
   // https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript?rq=1
-  let websocketURL = (window as any).websocketURL;
+  let webSocketURL = (window as any).serverVars?.webSocketURL;
 
   // setup the web socket
-  if ( websocketURL ) {
-    throw new Error(`window.websocketURL not specified`)
+  if ( ! webSocketURL ) {
+    throw new Error(`window.serverVars.websocketURL not specified`)
   }
-  let websocket = new WebSocket(websocketURL);
+  let websocket = new WebSocket(webSocketURL);
   websocket.onopen = open;
   websocket.onclose = close;
   websocket.onmessage = handleMessage;

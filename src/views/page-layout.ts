@@ -1,15 +1,24 @@
+import { log, ObjectLiteral } from "../shared/utils";
+
 const STATIC_DIR = "/_static";
 
 export function layoutPage({
   title = "Fullstack Serverless Starter Kit",
-  websocketURL,
-  // A simple message used for error pages
-  message,
+  serverVars = {},
 }: {
   title?: string;
-  websocketURL?: string;
-  message?: string;
+  serverVars?: ObjectLiteral;
 }): string {
+  let serverVarsJSON = JSON.stringify(serverVars);
+
+  // Additional concatenation needed to stop browser from seeing the /script
+  // and closing the tag early!
+  const liveReloadSnippet = `document.write('<script src="http://' + location.hostname +
+  ':35729/livereload.js?snipver=1"></' + 'script>')`;
+
+  // Used for passing data to front end app
+  const serverVarsSnippet = `window.serverVars = ${serverVarsJSON};`;
+
   return `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -23,23 +32,15 @@ export function layoutPage({
     <link rel='stylesheet' href='${STATIC_DIR}/build/bundle.css'>
     
     <script>
-      // Additional concatenation needed to stop browser from seeing the /script
-      // and closing the tag early!
-      document.write('<script src="http://' + location.hostname +
-    ':35729/livereload.js?snipver=1"></' + 'script>')
-
-      // Websocket URL
-      window.websocketURL = '${websocketURL ? websocketURL : null}';
+      ${liveReloadSnippet}
+      ${serverVarsSnippet}
     </script> 
   
     <script defer src='${STATIC_DIR}/build/bundle.js'></script>
-
         
   </head>
-  
   <body>
-    ${message ? `<main><h1>${message}</h1></main>` : ""} 
-    
+
   </body>
   </html>`;
 }

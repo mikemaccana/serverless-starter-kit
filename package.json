@@ -9,6 +9,10 @@
         "method": "get",
         "src": "dist/http/get-index"
       },
+      "/login": {
+        "method": "get",
+        "src": "dist/http/get-login"
+      },
       "/*": {
         "method": "any",
         "src": "dist/http/any-catchall"

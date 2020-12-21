@@ -7,14 +7,20 @@ function getWebSocketURL() {
   const testing = "ws://localhost:3333";
   const staging = "fixme: these urls are printed after create";
   const production = "fixme: these urls are printed after create";
-  if (env === "staging") return staging;
-  if (env === "production") return production;
+  if (env === "staging") {
+    return staging;
+  }
+  if (env === "production") {
+    return production;
+  }
   return testing;
 }
 
-const webSocketURL = getWebSocketURL();
+const serverVars = {
+  webSocketURL: getWebSocketURL(),
+};
 
-const html = layoutPage({ websocketURL: webSocketURL });
+const html = layoutPage({ serverVars });
 
 export async function handler(request: Request): Promise<Response> {
   return {
