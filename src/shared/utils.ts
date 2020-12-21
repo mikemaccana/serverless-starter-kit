@@ -56,5 +56,6 @@ export const dateFromNow = function (adjustmentMs: number): Date {
 };
 
 export interface ObjectLiteral {
+  // eslint-disable-next-line
   [key: string]: any;
 }
