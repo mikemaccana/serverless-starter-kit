@@ -35,7 +35,7 @@
     "build-frontend": "rollup -c",
     "build-frontend-watch": "rollup -c -w",
     "sandbox": "arc sandbox",
-    "push-to-aws": "npx arc deploy",
+    "push-to-aws": "arc deploy",
     "test": "jest",
     "start": "run-p build-backend-watch build-frontend-watch sandbox",
     "deploy": "run-s build-backend build-frontend push-to-aws",
