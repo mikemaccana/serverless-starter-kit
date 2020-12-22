@@ -54,6 +54,21 @@ The Arc sandbox is now running on http://localhost:3333
 ```bash
 npm test
 ```
+
+## Make a DB user 
+
+Run 'mongo'
+
+```
+// Type 'mongo' to use
+use myapp
+db.createUser({
+  user: "admin",
+  pwd: "somepassword",
+  roles: [ { role: "readWrite", db: "myapp" }]
+})
+```
+
 ## Deploy the code to AWS
 
 Set up your `~/.aws/credentials` and run:
