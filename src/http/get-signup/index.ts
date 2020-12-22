@@ -1,27 +1,25 @@
 import { Request, Response } from "../../shared/architect-types";
 import { STATUSES, CONTENT_TYPES, stringify, log } from "../../shared/utils";
-import { aFuckingWebPage, layoutPage } from "../../views/page-layout";
+import { aFuckingWebPage } from "../../views/page-layout";
 import arc from "@architect/functions";
 
 import config from "../../shared/config";
 
+require("@architect/shared/globals");
+
 export async function handler(request: Request): Promise<Response> {
   const session = arc.http.session.read(request);
 
-  const isLoggedIn = session?.person?.email;
+  log(`GET signup page. session is ${stringify(session)}`);
 
-  if (isLoggedIn) {
+  if (session?.person?.email) {
+    // You're already logged in
     return {
       statusCode: STATUSES.MOVED_TEMPORARILY,
       headers: {
         Location: config.loginRedirectURL,
       },
     };
-  }
-
-  let message = null;
-  if (session.attemptedEmail) {
-    message = `Could not log in as ${session.attemptedEmail}`;
   }
 
   return aFuckingWebPage;

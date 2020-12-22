@@ -1,6 +1,26 @@
-import { log, ObjectLiteral } from "../shared/utils";
+import {
+  CONTENT_TYPES,
+  log,
+  ObjectLiteral,
+  STATUSES,
+  stringify,
+} from "../../shared/utils";
 
 const STATIC_DIR = "/_static";
+
+function getWebSocketURL() {
+  const env = process.env.NODE_ENV;
+  const testing = "ws://localhost:3333";
+  const staging = "fixme: these urls are printed after create";
+  const production = "fixme: these urls are printed after create";
+  if (env === "staging") {
+    return staging;
+  }
+  if (env === "production") {
+    return production;
+  }
+  return testing;
+}
 
 export function layoutPage({
   title = "Fullstack Serverless Starter Kit",
@@ -9,7 +29,10 @@ export function layoutPage({
   title?: string;
   serverVars?: ObjectLiteral;
 }): string {
-  let serverVarsJSON = JSON.stringify(serverVars);
+  if (!serverVars) {
+    serverVars = {};
+  }
+  const serverVarsJSON = JSON.stringify(serverVars);
 
   // Additional concatenation needed to stop browser from seeing the /script
   // and closing the tag early!
@@ -44,3 +67,30 @@ export function layoutPage({
   </body>
   </html>`;
 }
+
+// Just return the same thing, since the frontend app will
+// show the right UI for the URL
+export const aFuckingWebPage = {
+  statusCode: STATUSES.OK,
+  headers: {
+    "Content-Type": CONTENT_TYPES.html,
+  },
+  body: layoutPage({
+    serverVars: {
+      webSocketURL: getWebSocketURL(),
+    },
+  }),
+};
+
+export const aNotFoundPage = {
+  statusCode: STATUSES["Not Found"],
+  headers: {
+    "Content-Type": CONTENT_TYPES.html,
+  },
+  body: layoutPage({
+    title: "Not found",
+    serverVars: {
+      message: "Not found",
+    },
+  }),
+};

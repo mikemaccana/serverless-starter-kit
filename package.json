@@ -13,6 +13,22 @@
         "method": "get",
         "src": "dist/http/get-login"
       },
+      "/signup": {
+        "method": "get",
+        "src": "dist/http/get-signup"
+      },
+      "/forgot": {
+        "method": "get",
+        "src": "dist/http/get-forgot"
+      },
+      "/forgot/sent": {
+        "method": "get",
+        "src": "dist/http/get-forgot-sent"
+      },
+      "/logout": {
+        "method": "get",
+        "src": "dist/http/get-logout"
+      },
       "/*": {
         "method": "any",
         "src": "dist/http/any-catchall"
