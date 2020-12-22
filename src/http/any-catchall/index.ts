@@ -16,7 +16,9 @@ export async function handler(request: Request): Promise<Response> {
     },
     body: layoutPage({
       title: "Not found",
-      message: "Not found",
+      serverVars: {
+        message: "Not found",
+      },
     }),
   };
 }
