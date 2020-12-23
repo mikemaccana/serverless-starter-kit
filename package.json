@@ -77,7 +77,7 @@
     "validate": "svelte-check"
   },
   "dependencies": {
-    "@architect/architect": "^8.4.2",
+    "@architect/architect": "^8.4.4",
     "@architect/functions": "^3.13.8",
     "@architect/sandbox": "^3.3.3",
     "@sendgrid/mail": "^7.4.0",
