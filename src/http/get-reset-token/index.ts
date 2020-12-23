@@ -12,7 +12,7 @@ import { dbOperation } from "@architect/shared/documentdb";
 import assert from "assert";
 import config from "@architect/shared/config";
 
-// learn more about http functions here: https://arc.codes/guides/http
+// The web page users get send to when they recieve a password reset email
 export async function handler(request: Request): Promise<Response> {
   const passwordResetToken = request.pathParameters.token;
   assert(passwordResetToken);

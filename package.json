@@ -4,6 +4,12 @@
   "arc": {
     "app": "typescript-serverless-starter-kit",
     "description": "A demo TypeScript Serverless app using Architect and Svelte",
+    "shared": {
+      "src": "dist/shared"
+    },
+    "views": {
+      "src": "dist/views"
+    },
     "http": {
       "/": {
         "method": "get",
