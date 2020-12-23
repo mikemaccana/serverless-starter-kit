@@ -4,7 +4,9 @@ import {
   ObjectLiteral,
   STATUSES,
   stringify,
-} from "../../shared/utils";
+} from "../shared/utils";
+import { Response } from "../shared/architect-types";
+import config from "../shared/config";
 
 const STATIC_DIR = "/_static";
 
@@ -68,21 +70,27 @@ export function layoutPage({
   </html>`;
 }
 
+export function makeResponseWithServerVars(
+  serverVars: ObjectLiteral
+): Response {
+  return {
+    statusCode: STATUSES.OK,
+    headers: {
+      "Content-Type": CONTENT_TYPES.html,
+    },
+    body: layoutPage({
+      serverVars: {
+        webSocketURL: getWebSocketURL(),
+      },
+    }),
+  };
+}
+
 // Just return the same thing, since the frontend app will
 // show the right UI for the URL
-export const aFuckingWebPage = {
-  statusCode: STATUSES.OK,
-  headers: {
-    "Content-Type": CONTENT_TYPES.html,
-  },
-  body: layoutPage({
-    serverVars: {
-      webSocketURL: getWebSocketURL(),
-    },
-  }),
-};
+export const webAppResponse = makeResponseWithServerVars({});
 
-export const aNotFoundPage = {
+export const notFoundResponse = {
   statusCode: STATUSES["Not Found"],
   headers: {
     "Content-Type": CONTENT_TYPES.html,
@@ -94,3 +102,12 @@ export const aNotFoundPage = {
     },
   }),
 };
+
+export function redirect(desctination: string): Response {
+  return {
+    statusCode: STATUSES.MOVED_TEMPORARILY,
+    headers: {
+      Location: config.loginRedirectURL,
+    },
+  };
+}

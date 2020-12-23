@@ -1,4 +1,4 @@
-import { log, STATUSES } from "../../shared/utils";
+import { log, STATUSES } from "@architect/shared/utils";
 
 exports.handler = async function ws(event) {
   // event.requestContext.connectionId

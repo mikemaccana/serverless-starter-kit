@@ -1,4 +1,6 @@
 import { STATUS_CODES } from "http";
+import arc from "@architect/functions";
+import { Request } from "./architect-types";
 
 export const SECONDS = 1000;
 
@@ -12,9 +14,19 @@ export const CONTENT_TYPES = {
   json: "application/json",
 };
 
-export async function asyncForEach<T>(
-  array: T[],
-  iterator: (item: T, index: number, array: T[]) => Promise<void>
+export function isLoggedIn(request: Request): boolean {
+  const session = arc.http.session.read(request);
+  log(`Checking isLoggedIn. session is ${stringify(session)}`);
+
+  if (session?.person?.email) {
+    return true;
+  }
+  return false;
+}
+
+export async function asyncForEach<Generic>(
+  array: Generic[],
+  iterator: (item: Generic, index: number, array: Generic[]) => Promise<void>
 ): Promise<void> {
   for (let index = 0; index < array.length; index++) {
     await iterator(array[index], index, array);
@@ -25,10 +37,10 @@ export const wait = async (timeInMs: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 };
 
-export async function repeat<T>(
-  func: () => Promise<T>,
+export async function repeat<Generic>(
+  func: () => Promise<Generic>,
   count: number
-): Promise<T[]> {
+): Promise<Generic[]> {
   const results = [];
   for (let index = 0; index < count; index++) {
     results.push(func());

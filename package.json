@@ -29,6 +29,14 @@
         "method": "get",
         "src": "dist/http/get-logout"
       },
+      "/reset/:token": {
+        "method": "get",
+        "src": "dist/http/get-reset-token"
+      },
+      "/api/v1/reset-password/:token": {
+        "method": "post",
+        "src": "dist/http/post-reset-token"
+      },
       "/*": {
         "method": "any",
         "src": "dist/http/any-catchall"
@@ -66,6 +74,7 @@
     "@architect/architect": "^8.4.2",
     "@architect/functions": "^3.13.8",
     "@architect/sandbox": "^3.3.3",
+    "@sendgrid/mail": "^7.4.0",
     "@types/mongodb": "^3.6.3",
     "eslint-plugin-jest": "^24.1.3",
     "mongodb": "^3.6.3",

@@ -1,4 +1,4 @@
-import { log, STATUSES } from "../../shared/utils";
+import { log, STATUSES } from "@architect/shared/utils";
 import arc from "@architect/functions";
 
 exports.handler = async function ws(event) {
