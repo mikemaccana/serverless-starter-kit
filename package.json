@@ -10,44 +10,74 @@
     "views": {
       "src": "dist/views"
     },
-    "http": {
-      "/": {
-        "method": "get",
-        "src": "dist/http/get-index"
+    "http": [
+      {
+        "/": {
+          "src": "dist/http/get-index",
+          "method": "get"
+        }
       },
-      "/login": {
-        "method": "get",
-        "src": "dist/http/get-login"
+      {
+        "/login": {
+          "src": "dist/http/get-login",
+          "method": "get"
+        }
       },
-      "/signup": {
-        "method": "get",
-        "src": "dist/http/get-signup"
+      {
+        "/login": {
+          "src": "dist/http/post-login",
+          "method": "post"
+        }
       },
-      "/forgot": {
-        "method": "get",
-        "src": "dist/http/get-forgot"
+      {
+        "/signup": {
+          "src": "dist/http/get-signup",
+          "method": "get"
+        }
       },
-      "/forgot/sent": {
-        "method": "get",
-        "src": "dist/http/get-forgot-sent"
+      {
+        "/signup": {
+          "src": "dist/http/post-signup",
+          "method": "post"
+        }
       },
-      "/logout": {
-        "method": "get",
-        "src": "dist/http/get-logout"
+      {
+        "/forgot": {
+          "src": "dist/http/get-forgot",
+          "method": "get"
+        }
       },
-      "/reset/:token": {
-        "method": "get",
-        "src": "dist/http/get-reset-token"
+      {
+        "/forgot/sent": {
+          "src": "dist/http/get-forgot-sent",
+          "method": "get"
+        }
       },
-      "/api/v1/reset-password/:token": {
-        "method": "post",
-        "src": "dist/http/post-reset-token"
+      {
+        "/logout": {
+          "src": "dist/http/get-logout",
+          "method": "get"
+        }
       },
-      "/*": {
-        "method": "any",
-        "src": "dist/http/any-catchall"
+      {
+        "/reset/:token": {
+          "src": "dist/http/get-reset-token",
+          "method": "get"
+        }
+      },
+      {
+        "/api/v1/reset-password/:token": {
+          "src": "dist/http/post-reset-token",
+          "method": "get"
+        }
+      },
+      {
+        "/*": {
+          "src": "dist/http/any-catchall",
+          "method": "any"
+        }
       }
-    },
+    ],
     "ws": {
       "connect": {
         "src": "dist/ws/connect"
@@ -82,7 +112,9 @@
     "@architect/functions": "^3.13.8",
     "@architect/sandbox": "^3.3.3",
     "@sendgrid/mail": "^7.4.0",
+    "@types/bcrypt": "^3.0.0",
     "@types/mongodb": "^3.6.3",
+    "bcrypt": "^5.0.0",
     "eslint-plugin-jest": "^24.1.3",
     "mongodb": "^3.6.3",
     "npm-run-all": "^4.1.5"

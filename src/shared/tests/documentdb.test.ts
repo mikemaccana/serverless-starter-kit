@@ -1,23 +1,82 @@
 import { config as dotEnvConfig } from "dotenv";
-import { dbOperation } from "../documentdb";
-import { ObjectID } from "mongodb";
+import {
+  addOrUpdate,
+  dbOperation,
+  destroyDatabase,
+  getAllDocuments,
+  HARD_CODE_TEST_DATABASE_NAME_WHEN_DESTROYING,
+} from "../documentdb";
+import { Db, ObjectID } from "mongodb";
 import { log } from "../utils";
+import { Person } from "../person";
+import { MILLISECONDS } from "../constants";
+
+const now = Date.now();
+
+const person: Person = {
+  givenName: "Mike",
+  familyName: "MacCana",
+  email: "mike.maccana@gmail.com",
+  created: now,
+  updated: now,
+};
+
 dotEnvConfig();
 
 describe(`MongoDB / DocumentDB client`, () => {
-  it(`Connects, does operation, and disconnects`, async () => {
-    const result = await dbOperation(async function (database) {
-      const movieCollection = database.collection("movies");
-      await movieCollection.insertOne({ title: "Back to the Future 2" });
-      const movie = await movieCollection.findOne({
+  it(
+    `Connects, does operation, and disconnects`,
+    async () => {
+      expect.assertions(1);
+      const result = await dbOperation(async function (database) {
+        const movieCollection = database.collection("movies");
+        await movieCollection.insertOne({ title: "Back to the Future 2" });
+        const movie = await movieCollection.findOne({
+          title: "Back to the Future 2",
+        });
+        return movie;
+      });
+
+      expect(result).toMatchObject({
+        _id: expect.any(ObjectID),
         title: "Back to the Future 2",
       });
-      return movie;
-    });
+    },
+    100 * MILLISECONDS
+  );
 
-    expect(result).toMatchObject({
-      _id: expect.any(ObjectID),
-      title: "Back to the Future 2",
-    });
-  }, 50);
+  test(
+    `clear test DB`,
+    async function () {
+      expect.assertions(0);
+      destroyDatabase();
+    },
+    50 * MILLISECONDS
+  );
+
+  test(
+    `Can save a document to DocumentDB`,
+    async function () {
+      expect.assertions(1);
+      await dbOperation(async function (database: Db) {
+        const updatedPerson = await addOrUpdate(database, "people", person);
+        expect(updatedPerson).toBeTruthy();
+      });
+    },
+    100 * MILLISECONDS
+  );
+
+  test(
+    `Can update an existing doc`,
+    async function () {
+      expect.assertions(1);
+      person.email = "mike@mikemaccana.com";
+      await dbOperation(async function (database: Db) {
+        await addOrUpdate(database, "people", person);
+        const people = await getAllDocuments(database, "people");
+        expect(people).toHaveLength(1);
+      });
+    },
+    50 * MILLISECONDS
+  );
 });

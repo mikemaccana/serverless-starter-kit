@@ -103,11 +103,20 @@ export const notFoundResponse = {
   }),
 };
 
-export function redirect(desctination: string): Response {
+export function redirect(
+  destination: string,
+  cookie?: ObjectLiteral
+): Response {
+  const headers = {
+    Location: destination,
+  };
+
+  if (cookie) {
+    headers["set-cookie"] = cookie;
+  }
+
   return {
     statusCode: STATUSES.MOVED_TEMPORARILY,
-    headers: {
-      Location: config.loginRedirectURL,
-    },
+    headers,
   };
 }

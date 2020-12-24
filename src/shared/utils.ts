@@ -1,6 +1,8 @@
 import { STATUS_CODES } from "http";
 import arc from "@architect/functions";
 import { Request } from "./architect-types";
+import util from "util";
+import crypto from "crypto";
 
 export const SECONDS = 1000;
 
@@ -62,10 +64,28 @@ export function deepClone(obj: ObjectLiteral): ObjectLiteral {
   return JSON.parse(JSON.stringify(obj));
 }
 
-export const dateFromNow = function (adjustmentMs: number): Date {
+export const dateFromNowNumber = function (adjustmentMs: number): number {
   const now: number = new Date().valueOf();
-  return new Date(now + adjustmentMs);
+  return now + adjustmentMs;
 };
+
+export const dateFromNow = function (adjustmentMs: number): Date {
+  return new Date(dateFromNowNumber(adjustmentMs));
+};
+
+export const getRandomBytes = util.promisify(crypto.randomBytes);
+
+export function makeStringUrlSafe(string: string): string {
+  // See https://en.wikipedia.org/wiki/Base64
+  // and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Character_Classes
+  const URL_UNSAFE_CHARACTERS = /^[\W]/g;
+  return string.replace(URL_UNSAFE_CHARACTERS, "");
+}
+
+export async function getRandomUrlSafeString(length: number): Promise<string> {
+  const buffer = await getRandomBytes(length);
+  return makeStringUrlSafe(buffer.toString("hex").substring(0, length));
+}
 
 export interface ObjectLiteral {
   // eslint-disable-next-line
