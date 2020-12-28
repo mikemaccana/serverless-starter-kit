@@ -1,5 +1,4 @@
-import { connect, Db, UpdateWriteOpResult } from "mongodb";
-import { warn } from "../http/any-catchall/node_modules/@architect/shared/utils";
+import { Db, UpdateWriteOpResult } from "mongodb";
 import { addOrUpdate, dbOperation } from "./documentdb";
 import { Person } from "./person";
 import uuid from "uuid";

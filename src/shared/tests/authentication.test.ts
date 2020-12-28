@@ -8,7 +8,7 @@ import {
   setPasswordResetToken,
 } from "../authentication";
 import { Person } from "../person";
-import { getRandomUrlSafeString, log } from "../utils";
+import { getRandomUrlSafeString } from "../utils";
 
 async function createDemoPerson() {
   return createPerson("Joe", "Smith", "joe@smith.com");

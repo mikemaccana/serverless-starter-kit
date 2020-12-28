@@ -8,15 +8,35 @@ import {
 } from "mongodb";
 import { encode as encodeQueryString } from "querystring";
 import { ObjectLiteral } from "./utils";
+import path from "path";
+
 dotenv.config();
 
 const log = console.log.bind(console);
 
+const ONLY_DESTROY_DATABASES_WITH_THIS_STRING_INCLUDED = "test";
+
+function getMongoConnectionString(
+  username: string,
+  password: string,
+  host: string,
+  database: string,
+  options
+) {
+  let connectionString = `mongodb://localhost/${database}?`;
+  connectionString += encodeQueryString(options);
+  return connectionString;
+}
+
+export function getDatabasenameForTests(): string {
+  const testPathFull = expect.getState().testPath;
+  return path.parse(testPathFull).name.replace(".", "-");
+}
+
+// We could get these later, but we override process.env.MONGODB_DATABASE in unit tests
 const USERNAME = process.env.MONGODB_USER;
 const PASSWORD = process.env.MONGODB_PASSWORD;
-const DATABASE = process.env.MONGODB_DATABASE;
-
-export const HARD_CODE_TEST_DATABASE_NAME_WHEN_DESTROYING = "unit_tests";
+const DATABASE = getDatabasenameForTests() || process.env.MONGODB_DATABASE;
 
 if (!USERNAME) {
   throw new Error(`Missing MONGODB_USER in .env file`);
@@ -30,30 +50,6 @@ if (!DATABASE) {
   throw new Error(`Missing MONGODB_DATABASE in .env file`);
 }
 
-function getMongoConnectionString(
-  username: string,
-  password: string,
-  host: string,
-  database: string,
-  options
-) {
-  let connectionString = `mongodb://localhost/${DATABASE}?`;
-  connectionString += encodeQueryString(options);
-  return connectionString;
-}
-
-const uri = getMongoConnectionString(
-  USERNAME,
-  PASSWORD,
-  "localhost",
-  DATABASE,
-  // From https://docs.mongodb.com/drivers/node/quick-start
-  {
-    retryWrites: true,
-    w: "majority",
-  }
-);
-
 // Great article on generics:
 // https://www.digitalocean.com/community/tutorials/typescript-generics-in-typescript
 export async function dbOperation<T>(
@@ -61,6 +57,18 @@ export async function dbOperation<T>(
 ): Promise<T> {
   let client: MongoClient;
   let result: T;
+
+  const uri = getMongoConnectionString(
+    USERNAME,
+    PASSWORD,
+    "localhost",
+    DATABASE,
+    // From https://docs.mongodb.com/drivers/node/quick-start
+    {
+      retryWrites: true,
+      w: "majority",
+    }
+  );
   try {
     // useUnifiedTopology prevents a deprection warning
     client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -76,6 +84,14 @@ export async function dbOperation<T>(
 
 export async function destroyDatabase(): Promise<void> {
   await dbOperation(async function (database) {
+    const databaseName = database.databaseName;
+    if (
+      !databaseName.includes(ONLY_DESTROY_DATABASES_WITH_THIS_STRING_INCLUDED)
+    ) {
+      throw new Error(
+        `Refusing to delete database '${databaseName}' as it does not include '${ONLY_DESTROY_DATABASES_WITH_THIS_STRING_INCLUDED}'`
+      );
+    }
     await database.dropDatabase();
   });
 }

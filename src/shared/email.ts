@@ -1,7 +1,8 @@
 import config from "./config";
 
 // From https://app.sendgrid.com/guide/integrate/langs/nodejs
-const sendgridEmail = require("@sendgrid/mail");
+import sendgridEmail from "@sendgrid/mail";
+
 sendgridEmail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const from = config.email.fromAddress;

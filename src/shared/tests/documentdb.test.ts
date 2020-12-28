@@ -4,12 +4,13 @@ import {
   dbOperation,
   destroyDatabase,
   getAllDocuments,
-  HARD_CODE_TEST_DATABASE_NAME_WHEN_DESTROYING,
+  getDatabasenameForTests,
 } from "../documentdb";
 import { Db, ObjectID } from "mongodb";
 import { log } from "../utils";
 import { Person } from "../person";
 import { MILLISECONDS } from "../constants";
+import path from "path";
 
 const now = Date.now();
 
@@ -24,6 +25,10 @@ const person: Person = {
 dotEnvConfig();
 
 describe(`MongoDB / DocumentDB client`, () => {
+  it(`Gets the correct database name for tests`, () => {
+    expect(getDatabasenameForTests()).toEqual("documentdb-test");
+  });
+
   it(
     `Connects, does operation, and disconnects`,
     async () => {
