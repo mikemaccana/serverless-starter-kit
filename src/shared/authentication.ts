@@ -53,7 +53,7 @@ export async function _makeHashedPassword(
 }
 
 // Shared functionality used when setting and resetting passwords
-export async function _setPassword(
+async function _setPassword(
   database: Db,
   person: Person,
   suppliedPassword: string
@@ -121,7 +121,7 @@ export async function makePasswordResetToken(): Promise<string> {
 }
 
 // Shared functionality for setting and resetting password reset tokens
-export async function _setPasswordResetToken(
+async function _setPasswordResetToken(
   database: Db,
   person: Person,
   token: string
