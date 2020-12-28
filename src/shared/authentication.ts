@@ -19,6 +19,33 @@ import { DAY } from "./constants";
 const AMOUNT_OF_BCRYPT_ROUNDS = 4096;
 const BCRYPT_SALT_ROUNDS = Math.log2(AMOUNT_OF_BCRYPT_ROUNDS);
 
+export async function createPerson(
+  email: string,
+  givenName: string,
+  familyName: string
+): Promise<Person> {
+  const person: Person = {
+    email,
+    givenName,
+    familyName,
+    _id: uuid.v4(),
+    created: Date.now(),
+    updated: Date.now(),
+  };
+
+  await dbOperation(async function (database) {
+    const updatedPerson = await addOrUpdate(database, "people", person);
+  });
+
+  return person;
+}
+
+export async function getPersonByEmail(email: string): Promise<Person> {
+  return dbOperation(async function (database) {
+    return database.collection("people").findOne({ email });
+  });
+}
+
 export async function _makeHashedPassword(
   plainTextPassword: string
 ): Promise<string> {
@@ -69,33 +96,6 @@ export async function resetPasswordWithToken(
       personDetails as Person,
       suppliedPassword
     );
-  });
-}
-
-export async function createPerson(
-  email: string,
-  givenName: string,
-  familyName: string
-): Promise<Person> {
-  const person: Person = {
-    email,
-    givenName,
-    familyName,
-    _id: uuid.v4(),
-    created: Date.now(),
-    updated: Date.now(),
-  };
-
-  await dbOperation(async function (database) {
-    const updatedPerson = await addOrUpdate(database, "people", person);
-  });
-
-  return person;
-}
-
-export async function getPersonByEmail(email: string): Promise<Person> {
-  return dbOperation(async function (database) {
-    return database.collection("people").findOne({ email });
   });
 }
 
