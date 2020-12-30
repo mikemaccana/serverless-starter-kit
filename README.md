@@ -55,6 +55,12 @@ The Arc sandbox is now running on http://localhost:3333
 npm test
 ```
 
+Or to run a single test suite or test:
+
+```bash
+npm test-filter "Auth"
+```
+
 ## Make a DB user 
 
 Run 'mongo'

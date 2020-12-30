@@ -102,6 +102,7 @@
     "sandbox": "arc sandbox",
     "push-to-aws": "arc deploy",
     "test": "jest",
+    "test-filter": "jest -t",
     "start": "run-p build-backend-watch build-frontend-watch sandbox",
     "deploy": "run-s build-backend build-frontend push-to-aws",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
