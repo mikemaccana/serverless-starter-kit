@@ -5,7 +5,6 @@ import uuid from "uuid";
 
 import bcrypt from "bcrypt";
 
-import { ObjectLiteral } from "../http/any-catchall/node_modules/@architect/shared/utils";
 import {
   dateFromNow,
   dateFromNowNumber,
@@ -78,27 +77,22 @@ export async function setPassword(
 export async function resetPasswordWithToken(
   suppliedResetToken: string,
   suppliedPassword: string
-): Promise<UpdateWriteOpResult> {
+): Promise<Person> {
   const now = Date.now();
   return dbOperation(async function (database) {
-    const personDetails: ObjectLiteral = await database
-      .collection("people")
-      .findOne({
-        passwordResetToken: suppliedResetToken,
-        passwordResetTokenExpires: { $gte: now },
-      });
-    if (!personDetails) {
+    const person: Person = await database.collection("people").findOne({
+      passwordResetToken: suppliedResetToken,
+      passwordResetTokenExpires: { $gte: now },
+    });
+    if (!person) {
       throw new Error("Invalid or expired token");
     }
 
-    return await _setPassword(
-      database,
-      personDetails as Person,
-      suppliedPassword
-    );
+    await _setPassword(database, person, suppliedPassword);
+
+    return person;
   });
 }
-
 export async function authenticate(
   person: Person,
   suggestedPassword: string
