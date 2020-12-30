@@ -1,6 +1,6 @@
 import { Request, Response } from "@architect/shared/architect-types";
 import { log } from "@architect/shared/utils";
-import { redirect } from "../../views/page-layout";
+import { redirect } from "@architect/views/page-layout";
 import arc from "@architect/functions";
 import { resetPasswordWithToken } from "@architect/shared/authentication";
 import assert from "assert";
@@ -14,8 +14,10 @@ require("@architect/shared/globals");
 export async function handler(request: Request): Promise<Response> {
   const session = arc.http.session.read(request);
 
-  const passwordResetToken = request.pathParameters.token,
-    suppliedPassword = request.body.password;
+  const body = JSON.parse(request.body);
+
+  const passwordResetToken = request.pathParameters.token;
+  const suppliedPassword = body.password;
 
   assert(passwordResetToken);
   assert(suppliedPassword);
