@@ -29,7 +29,11 @@ function getMongoConnectionString(
 }
 
 export function getDatabasenameForTests(): string {
-  const testPathFull = expect.getState().testPath;
+  // 'expect' will be provided by tests
+  if (!(global as any).expect) {
+    return null;
+  }
+  const testPathFull = expect?.getState().testPath;
   return path.parse(testPathFull).name.replace(".", "-");
 }
 

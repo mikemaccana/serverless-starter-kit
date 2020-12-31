@@ -46,27 +46,26 @@ export function layoutPage({
 
   return `<!DOCTYPE html>
   <html lang="en">
-  <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width,initial-scale=1'>
-  
-    <title>${title}</title>
-  
-    <link rel='icon' type='image/png' href='${STATIC_DIR}/images/favicon.png'>
-    <link rel='stylesheet' href='${STATIC_DIR}/css/global.css'>
-    <link rel='stylesheet' href='${STATIC_DIR}/build/bundle.css'>
+    <head>
+      <meta charset='utf-8'>
+      <meta name='viewport' content='width=device-width,initial-scale=1'>
+      <title>${title}</title>
     
-    <script>
-      ${liveReloadSnippet}
-      ${serverVarsSnippet}
-    </script> 
-  
-    <script defer src='${STATIC_DIR}/build/bundle.js'></script>
-        
-  </head>
-  <body>
+      <link rel='icon' type='image/png' href='${STATIC_DIR}/images/favicon.png'>
+      <link rel='stylesheet' href='${STATIC_DIR}/css/global.css'>
+      <link rel='stylesheet' href='${STATIC_DIR}/build/bundle.css'>
+      
+      <script>
+        ${liveReloadSnippet}
+        ${serverVarsSnippet}
+      </script> 
+    
+      <script defer src='${STATIC_DIR}/build/bundle.js'></script>      
+    </head>
+    
+    <body>
 
-  </body>
+    </body>
   </html>`;
 }
 

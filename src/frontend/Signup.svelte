@@ -1,8 +1,32 @@
 <script lang="ts">
   import { router, Router, Route, Link } from "yrv";
   import { arcStatic, arcURL} from './arc-svelte-helpers'
+  import { getFormDetails } from './get-form-contents'
+
+  import { log } from "./basics";
+  import { http } from "./modern-http";
+
   let message = (window as any).serverVars?.message;
   let attemptedEmail = (window as any).serverVars?.attemptedEmail
+
+  const submitForm = async function(event){
+    const { values, url } = getFormDetails('form')
+    log(`NEW NEE HOTNESS 2`)
+    const response = await http.post(url, values) 
+    // // await fetch('http://localhost:3333/signup', {
+    // //   method: 'POST',
+    // //   headers: {
+    // //     'Content-Type': 'application/json',
+    // //     Accept: 'application/json',
+    // //   },
+    // //   body: {
+    // //     simple: 'test'
+    // //   } 
+    // // });
+    // debugger
+    event.preventDefault()
+  }
+  
 
 </script>
 
@@ -11,7 +35,7 @@
 </style>
 
 <div class="dialog-page">
-  <form method="post" action={arcURL('/signup')}>
+  <form method="post" action={arcURL('/signup')} on:submit={submitForm}>
 
     <a href="/">
       <img class="logo" alt="logo" src={arcStatic('/images/logo.svg')} />
@@ -22,28 +46,28 @@
 
     <div class="input-and-label">
       <!-- svelte-ignore a11y-autofocus -->
-      <input name="given-name" required={true} autocomplete="off" placeholder="Given name" autofocus />
-      <label for="given-name">Given name</label>
+      <input name="givenName" required={true} placeholder="Given name" autofocus />
+      <label for="givenName">Given name</label>
     </div>
 
     <div class="input-and-label">
-      <input name="family-name" required={true} autocomplete="off" placeholder="Family name" />
-      <label for="family-name">Family name</label>
+      <input name="familyName" required={true} placeholder="Family name" />
+      <label for="familyName">Family name</label>
     </div>
 
     <div class="input-and-label">
-      <input name="email" required={true} type="email" autocomplete="off" placeholder="Email address" />
+      <input name="email" required={true} type="email" placeholder="Email address" />
       <label for="email">Email address</label>
     </div>
 
     <div class="input-and-label">
-      <input name="password" required={true} type="password" autocomplete="off" placeholder="Password" />
+      <input name="password" required={true} type="password" placeholder="Password" />
       <label for="password">Password</label>
     </div>
 
     <div class="input-and-label checkbox">
-      <input type="checkbox" required />
-      <label for="tsandcs">Agree to the terms of conditions</label>
+      <input name="isTermsAndConditionsAgreed" required={true} type="checkbox" checked={false}/>
+      <label for="isTermsAndConditionsAgreed">Agree to the terms of conditions</label>
     </div>
 
     <button type="submit">Sign up</button>
