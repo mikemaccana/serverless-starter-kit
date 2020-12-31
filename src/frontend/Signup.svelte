@@ -6,28 +6,6 @@
   import { log } from "./basics";
   import { http } from "./modern-http";
 
-  let message = (window as any).serverVars?.message;
-  let attemptedEmail = (window as any).serverVars?.attemptedEmail
-
-  const submitForm = async function(event){
-    const { values, url } = getFormDetails('form')
-    log(`NEW NEE HOTNESS 2`)
-    const response = await http.post(url, values) 
-    // // await fetch('http://localhost:3333/signup', {
-    // //   method: 'POST',
-    // //   headers: {
-    // //     'Content-Type': 'application/json',
-    // //     Accept: 'application/json',
-    // //   },
-    // //   body: {
-    // //     simple: 'test'
-    // //   } 
-    // // });
-    // debugger
-    event.preventDefault()
-  }
-  
-
 </script>
 
 <style>
@@ -35,7 +13,7 @@
 </style>
 
 <div class="dialog-page">
-  <form method="post" action={arcURL('/signup')} on:submit={submitForm}>
+  <form method="post" action={arcURL('/signup')}>
 
     <a href="/">
       <img class="logo" alt="logo" src={arcStatic('/images/logo.svg')} />
