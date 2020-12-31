@@ -4,8 +4,6 @@ import { webAppResponse, redirect } from "../../views/page-layout";
 
 import config from "@architect/shared/config";
 
-require("@architect/shared/globals");
-
 export async function handler(request: Request): Promise<Response> {
   if (isLoggedIn(request)) {
     // You're already logged in, no need to sign up
