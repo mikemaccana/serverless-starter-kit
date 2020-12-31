@@ -1,11 +1,14 @@
 <script lang="ts">
 	export let name: string;
 	import Chat from "./Chat.svelte"
+	import TitleBar from "./TitleBar.svelte"
 	import Login from "./Login.svelte"
 	const STATIC_DIR = "/_static";
 </script>
 
 <main>
+
+	<TitleBar />
 	{#if window.location.pathname === '/'}
 		<h1>Hello {name}</h1>
 		<img alt="logos" src="{STATIC_DIR}/images/logos.svg"/>
