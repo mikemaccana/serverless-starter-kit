@@ -26,13 +26,14 @@ export interface Person extends Entity {
 
 // }
 
-// enum TaskStatus {
-//   Recieved = "RECIEVED",
-//   Accepted = "ACCEPTED",
-//   WorkingOnIt = "WORKING_ON_IT",
-//   Rejected = "REJECTED",
-//   Stuck = "STUCK",
-// }
+enum TaskStatus {
+  Negotation = "NEGOTATION", // Default phase, negotation phase
+  Accepted = "ACCEPTED",
+  WorkingOnIt = "WORKING_ON_IT",
+  Rejected = "REJECTED",
+  Complete = "COMPLETE",
+  // If we get stuck, we send back to negotation or reject
+}
 
 // export interface Task extends Entity {
 //   name: string;
