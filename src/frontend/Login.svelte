@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { arcStatic, arcURL} from './arc-svelte-helpers.ts'
+  import { router, Router, Route, Link } from "yrv";
+  import { arcStatic, arcURL} from './arc-svelte-helpers'
   let message = (window as any).serverVars?.message;
   let attemptedEmail = (window as any).serverVars?.attemptedEmail
 
@@ -13,20 +14,20 @@
     
   <form method="post" action={arcURL('/login')}>
 
-    <a href="/">
+    <Link href="/">
       <img class="logo" alt="Logo" src={arcStatic('/images/logo-light.svg')} />
-    </a>
+    </Link>
 
     <h2>Log in.</h2>
 
     <div class="input-and-label">
       <!-- svelte-ignore a11y-autofocus -->
-      <input name="email" required="required" type="email" autocomplete="off" value={attemptedEmail || ''} placeholder="Email address" autofocus />
+      <input name="email" required={true} type="email" autocomplete="off" value={attemptedEmail || ''} placeholder="Email address" autofocus />
       <label for="email">Email address</label>
     </div>
 
     <div class="input-and-label">
-      <input name="password" required="required" type="password" autocomplete="off" placeholder="Password" />
+      <input name="password" required={true} type="password" autocomplete="off" placeholder="Password" />
       <label for="password">Password</label>
     </div>
 
@@ -36,11 +37,15 @@
 
   <div class="alternative">
     <p>
-      <a href={arcURL('/forgot')}>Forgot your password?</a>
+      <Link href="/forgot">
+        Forgot your password?
+      </Link>
     </p>
     <p>
       Don't have an account?
-      <a href={arcURL('/signup')}>Sign up</a>
+      <Link href="/signup">
+        Sign up
+      </Link>
     </p>
   </div>
 </div>
