@@ -3,7 +3,6 @@ import {
   createPerson,
   makePasswordResetToken,
   resetPasswordWithToken,
-  setPassword,
   setPasswordResetToken,
 } from "../authentication";
 import { SECONDS } from "../constants";

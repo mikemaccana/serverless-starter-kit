@@ -33,12 +33,14 @@ export async function createPerson(
     updated: Date.now(),
   };
 
+  let updatedPerson: Person;
   await dbOperation(async function (database) {
     await addOrUpdate(database, "people", person);
     await _setPassword(database, person, password);
+    updatedPerson = await database.collection("people").findOne({ email });
   });
 
-  return person;
+  return updatedPerson;
 }
 
 export async function getPersonByEmail(email: string): Promise<Person> {
