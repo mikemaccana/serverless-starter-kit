@@ -21,7 +21,8 @@ const BCRYPT_SALT_ROUNDS = Math.log2(AMOUNT_OF_BCRYPT_ROUNDS);
 export async function createPerson(
   email: string,
   givenName: string,
-  familyName: string
+  familyName: string,
+  password: string
 ): Promise<Person> {
   const person: Person = {
     email,
@@ -33,7 +34,8 @@ export async function createPerson(
   };
 
   await dbOperation(async function (database) {
-    const updatedPerson = await addOrUpdate(database, "people", person);
+    await addOrUpdate(database, "people", person);
+    await _setPassword(database, person, password);
   });
 
   return person;
@@ -97,15 +99,29 @@ export async function authenticate(
   person: Person,
   suggestedPassword: string
 ): Promise<boolean> {
+  if (!person.password) {
+    return null;
+  }
   return bcrypt.compare(suggestedPassword, person.password);
 }
 
 export async function authenticateWithEmail(
   email: string,
   suggestedPassword: string
-): Promise<boolean> {
+): Promise<Person | null> {
   const person = await getPersonByEmail(email);
-  return authenticate(person, suggestedPassword);
+  if (!person) {
+    log(
+      `Attempt to log in as person with email address '${email}', which doesn't exist`
+    );
+    return null;
+  }
+  const isAuthenticated = await authenticate(person, suggestedPassword);
+  if (!isAuthenticated) {
+    return null;
+  }
+  log(`Successfully authenticated as ${email}`);
+  return person;
 }
 
 // Return some random URL safe text

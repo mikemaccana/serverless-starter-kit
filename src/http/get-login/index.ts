@@ -5,7 +5,7 @@ import {
   stringify,
   log,
 } from "@architect/shared/utils";
-import { webAppResponse, layoutPage } from "../../views/page-layout";
+import { webAppResponse, layoutPage } from "@architect/views/page-layout";
 import arc from "@architect/functions";
 
 import config from "@architect/shared/config";

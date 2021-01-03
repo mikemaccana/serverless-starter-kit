@@ -6,7 +6,8 @@ import {
   log,
   ObjectLiteral,
 } from "@architect/shared/utils";
-import { webAppResponse, layoutPage, redirect } from "../../views/page-layout";
+import { webAppResponse, layoutPage } from "@architect/views/page-layout";
+import redirect from "@architect/shared/redirect";
 import arc from "@architect/functions";
 import { dbOperation } from "@architect/shared/documentdb";
 import assert from "assert";

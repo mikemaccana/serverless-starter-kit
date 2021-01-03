@@ -1,6 +1,6 @@
 import { Request, Response } from "@architect/shared/architect-types";
-import { log } from "@architect/shared/utils";
-import { redirect } from "@architect/views/page-layout";
+import { log, ObjectLiteral } from "@architect/shared/utils";
+import redirect from "@architect/shared/redirect";
 import arc from "@architect/functions";
 import { resetPasswordWithToken } from "@architect/shared/authentication";
 import assert from "assert";
@@ -11,11 +11,10 @@ require("@architect/shared/globals");
 
 // Handle a user resetting their password - check the token and set their
 // password, or if the token is invalid, ask them to try again
-export async function handler(request: Request): Promise<Response> {
+async function handler(request: Request): Promise<Response> {
   const session = arc.http.session.read(request);
 
-  const body = JSON.parse(request.body);
-
+  const body = request.body as ObjectLiteral;
   const passwordResetToken = request.pathParameters.token;
   const suppliedPassword = body.password;
 
@@ -36,3 +35,6 @@ export async function handler(request: Request): Promise<Response> {
 
   return redirect(config.loginRedirectURL, cookie);
 }
+
+// Needed to decode form data
+exports.handler = arc.http.async(handler);

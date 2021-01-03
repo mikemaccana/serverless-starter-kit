@@ -1,4 +1,3 @@
-import { SECONDS } from "../../http/any-catchall/node_modules/@architect/shared/utils";
 import {
   authenticate,
   createPerson,
@@ -7,14 +6,17 @@ import {
   setPassword,
   setPasswordResetToken,
 } from "../authentication";
+import { SECONDS } from "../constants";
 import { Person } from "../person";
 import { getRandomUrlSafeString } from "../utils";
 
-async function createDemoPerson() {
-  return createPerson("Joe", "Smith", "joe@smith.com");
-}
+const SECRET = "bananas";
 
 const newPassword = "ZOMG NEW PASSWORD";
+
+async function createDemoPerson() {
+  return createPerson("Joe", "Smith", "joe@smith.com", SECRET);
+}
 
 describe(`Authentication`, () => {
   let passwordResetToken: string | null = null;
@@ -25,9 +27,7 @@ describe(`Authentication`, () => {
   });
 
   test(`can make a person with a hashed password`, async () => {
-    const SECRET = "bananas";
     const demoPerson: Person = await createDemoPerson();
-    await setPassword(demoPerson, SECRET);
     const successfulLoginResult: boolean = await authenticate(
       demoPerson,
       SECRET

@@ -11,7 +11,7 @@ export interface Request {
   cookies?: string[];
   headers: ObjectLiteral;
   requestContext: ObjectLiteral;
-  body?: string;
+  body?: string | ObjectLiteral;
   isBase64Encoded: boolean;
 }
 

@@ -1,24 +1,26 @@
 import { Request, Response } from "@architect/shared/architect-types";
 import { log, ObjectLiteral, stringify } from "@architect/shared/utils";
-import config from "@architect/shared/config";
 import arc from "@architect/functions";
-import { createPerson } from "@architect/shared/authentication";
 import redirect from "@architect/shared/redirect";
+import { authenticateWithEmail } from "@architect/shared/authentication";
 
-// Create a user account and sign people up!
+// Check credentials
 async function handler(request: Request): Promise<Response> {
   const body: ObjectLiteral = request.body as ObjectLiteral;
-  const { email, givenName, familyName, password } = body;
-  log({ email, givenName, familyName, password });
-  const person = await createPerson(email, givenName, familyName, password);
+  const { email, password } = body;
+  log({ email, password });
+  const person = await authenticateWithEmail(email, password);
 
-  log(`Created person in DB`, person);
+  // Throw away bad logins
+  if (!person) {
+    log(`Invalid login attempt for ${email}`);
+    return redirect("/login");
+  }
+
+  // Otherwise attach the person to the session
   const cookie = await arc.http.session.write({ person });
   log(`Attached a person ${person._id} to the session.`);
-  const response = redirect(config.loginRedirectURL, cookie);
-  log(`Response is`, response);
-  log(`Redirecting...`);
-  return response;
+  return redirect("/", cookie);
 }
 
 // Needed to decode form data

@@ -1,0 +1,1 @@
+ - ping mongo before starting sandbox or tests

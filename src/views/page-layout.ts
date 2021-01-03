@@ -6,7 +6,6 @@ import {
   stringify,
 } from "../shared/utils";
 import { Response } from "../shared/architect-types";
-import config from "../shared/config";
 
 const STATIC_DIR = "/_static";
 
@@ -69,25 +68,28 @@ export function layoutPage({
   </html>`;
 }
 
-export function makeResponseWithServerVars(
-  serverVars: ObjectLiteral
-): Response {
+export function makeWebAppResponse(serverVars: ObjectLiteral): Response {
+  serverVars.webSocketURL = getWebSocketURL();
+
+  // Redact sensitive info
+  if (serverVars.person && serverVars.person.password) {
+    delete serverVars.person.password;
+  }
+
   return {
     statusCode: STATUSES.OK,
     headers: {
       "Content-Type": CONTENT_TYPES.html,
     },
     body: layoutPage({
-      serverVars: {
-        webSocketURL: getWebSocketURL(),
-      },
+      serverVars,
     }),
   };
 }
 
-// Just return the same thing, since the frontend app will
+// Just return the front end web app, since the frontend app will
 // show the right UI for the URL
-export const webAppResponse = makeResponseWithServerVars({});
+export const webAppResponse = makeWebAppResponse({});
 
 export const notFoundResponse = {
   statusCode: STATUSES["Not Found"],
@@ -101,21 +103,3 @@ export const notFoundResponse = {
     },
   }),
 };
-
-export function redirect(
-  destination: string,
-  cookie?: ObjectLiteral
-): Response {
-  const headers = {
-    Location: destination,
-  };
-
-  if (cookie) {
-    headers["set-cookie"] = cookie;
-  }
-
-  return {
-    statusCode: STATUSES.MOVED_TEMPORARILY,
-    headers,
-  };
-}

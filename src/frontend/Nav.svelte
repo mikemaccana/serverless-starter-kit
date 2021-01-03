@@ -1,13 +1,26 @@
-<script lang="ts">
+
+
+<script lang="ts">  
   import { Link } from "yrv";
+  const serverVars = (window as any).serverVars;
+
 </script>
 
 <nav>
-  <!-- You are logged in as XXX -->
-
-  <Link href="/login">
-    Log in
-  </Link>
+  <!-- Show user information -->
+  {#if serverVars?.person }
+    <p>You're logged in as {serverVars?.person?.givenName}
+      <a href="/logout">
+        Log out
+      </a>
+    </p>
+  
+  {:else}
+    <Link href="/login">
+      Log in
+    </Link>
+  {/if}
+  
 </nav>
 
 <style>

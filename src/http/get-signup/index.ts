@@ -1,7 +1,7 @@
 import { Request, Response } from "@architect/shared/architect-types";
 import { isLoggedIn } from "@architect/shared/utils";
-import { webAppResponse, redirect } from "../../views/page-layout";
-
+import { webAppResponse } from "@architect/views/page-layout";
+import redirect from "@architect/shared/redirect";
 import config from "@architect/shared/config";
 
 export async function handler(request: Request): Promise<Response> {
