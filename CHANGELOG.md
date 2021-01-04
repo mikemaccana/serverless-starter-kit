@@ -2,7 +2,9 @@
 
 # 1.1
 
- - Added users and DataBase support
+ - Added MongoDB support
+ - Added users 
+ - Added websockets 
 
 # 1.0 
 
