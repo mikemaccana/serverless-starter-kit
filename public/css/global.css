@@ -23,7 +23,7 @@ html, body {
 }
 
 body {
-	color: #333;
+	color: var(--dark-grey);
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -31,16 +31,12 @@ body {
 }
 
 a {
-	color: rgb(0,100,200);
+	color: var(--mid-blue);
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
-}
-
-a:visited {
-	color: rgb(0,80,160);
 }
 
 label {

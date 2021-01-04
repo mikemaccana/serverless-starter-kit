@@ -22,28 +22,28 @@
 
     <p>Enter an email and password to sign up</p>
 
-    <div class="input-and-label">
+    <div class="text-input-and-label">
       <!-- svelte-ignore a11y-autofocus -->
       <input name="givenName" required={true} placeholder="Given name" autofocus />
       <label for="givenName">Given name</label>
     </div>
 
-    <div class="input-and-label">
+    <div class="text-input-and-label">
       <input name="familyName" required={true} placeholder="Family name" />
       <label for="familyName">Family name</label>
     </div>
 
-    <div class="input-and-label">
+    <div class="text-input-and-label">
       <input name="email" required={true} type="email" placeholder="Email address" />
       <label for="email">Email address</label>
     </div>
 
-    <div class="input-and-label">
+    <div class="text-input-and-label">
       <input name="password" required={true} type="password" placeholder="Password" />
       <label for="password">Password</label>
     </div>
 
-    <div class="input-and-label checkbox">
+    <div class="checkbox-and-label">
       <input name="isTermsAndConditionsAgreed" required={true} type="checkbox" checked={false}/>
       <label for="isTermsAndConditionsAgreed">Agree to the terms of conditions</label>
     </div>

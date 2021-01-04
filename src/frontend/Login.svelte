@@ -20,13 +20,13 @@
 
     <h2>Log in.</h2>
 
-    <div class="input-and-label">
+    <div class="text-input-and-label">
       <!-- svelte-ignore a11y-autofocus -->
       <input name="email" required={true} type="email" autocomplete="off" value={attemptedEmail || ''} placeholder="Email address" autofocus />
       <label for="email">Email address</label>
     </div>
 
-    <div class="input-and-label">
+    <div class="text-input-and-label">
       <input name="password" required={true} type="password" autocomplete="off" placeholder="Password" />
       <label for="password">Password</label>
     </div>

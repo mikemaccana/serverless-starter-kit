@@ -3,10 +3,10 @@
 	--white: #eaeaea;
 	--off-white: #f6f6f6;
 	--grey-white: #eaeaea;
-	--light-grey: #b7b7b7;
+	--light-grey: #ccc;
 	--mid-grey: #777777;
-	--mid-blue: #2271B6;
-	--dark-grey: #222;
+	--mid-blue: rgb(0,100,200);
+	--dark-grey: #333;
 	--black: #161616;
   --scary-red: #b90f00;
 }

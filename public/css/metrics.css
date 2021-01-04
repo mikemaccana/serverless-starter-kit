@@ -1,4 +1,5 @@
 :root {
 	--spacing: 6px;
+	--border-width: 1px;
 	--single-column-threshold-width: 850px;
 }

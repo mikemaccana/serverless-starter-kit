@@ -1,38 +1,18 @@
 
 form {
   width: 100%;
+  display: grid;
   max-width: var(--single-column-threshold-width);
   padding: calc(var(--spacing) * 2);
   grid-gap: calc(var(--spacing) * 2);
 }
 
-/* Creates cool label-moves-when-active effect 
+/* Display an inout box, with a label that only appears when the user is typing
 See https://jonathan-harrell.com/advanced-css-form-styling/ */
-.input-and-label {
+.text-input-and-label {
   position: relative;
   transition: all ease-in-out 0.1s;
-  margin-bottom: calc(var(--spacing) * 2);
 }
-
-button {
-  margin-bottom: var(--spacing);
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
-}
-
-button:disabled {
-	color: #999;
-}
-
-button:not(:disabled):active {
-	background-color: #ddd;
-}
-
-button:focus {
-	border-color: #666;
-}
-
 
 /* Per Stripe docs https://stripe.com/docs/stripe-js/elements/quickstart
 "No CSS styles should be applied directly to anything Elements inserts inside your container DOM element. Style the container DOM element instead."
@@ -54,7 +34,7 @@ textarea,
   font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
-	border: 1px solid #ccc;
+	border: var(--border-width) solid var(--light-grey);
 }
 
 
@@ -63,7 +43,6 @@ input:disabled {
 }
 
 textarea {
-  font-family: sans-serif;
   min-height: 100px;
 }
 
@@ -86,10 +65,10 @@ input:focus,
   border-color: var(--brand-color);
 }
 
-.input-and-label label {
+.text-input-and-label label {
   position: absolute;
   top: 9px;
-  left: var(--spacing);
+  left: calc(var(--spacing) + var(--border-width));
   font-size: 8pt;
   line-height: 8pt;
   font-weight: 600;
@@ -103,27 +82,31 @@ input:focus,
   background-color: unset !important;
 }
 
-
-
-.input-and-label.checkbox {
+.checkbox-and-label {
   display: grid;
   justify-items: left;
   grid-template-columns: calc(var(--spacing) * 3) auto;
 }
 
-input[type="checkbox"] {
-  margin: 10px 0 calc(var(--spacing) * 2) 0;
+.checkbox-and-label input[type="checkbox"] {
+  margin: 0;
 }
 
-.input-and-label.checkbox label {
+.text-input-and-label.checkbox label {
   position: relative;
   transform: none;
   text-align: left;
   padding: var(--spacing) 0;
 }
 
-.input-and-label:hover,
-button:hover,
-.button {
-  border-color: var(--good);
+button {
+  border: var(--border-width) solid var(--light-grey);
+  padding: var(--spacing) calc(var(--spacing) * 2) ;
+  margin: var(--spacing);
+	color: #333;
+	background-color: #f4f4f4;
+  outline: none;
+  font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
 }
