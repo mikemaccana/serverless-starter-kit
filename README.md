@@ -6,7 +6,7 @@
  - [Architect Serverless](https://arc.codes)
    - A full local AWS sandbox
    - Easily shared code between routes
-   - Easly create AWS infrastructure - the `arc` in [package.json] creates the AWS SAM `sam.yaml` file for you!
+   - Easly create AWS infrastructure - the `arc` in [package.json](package.json) creates the AWS SAM `sam.yaml` file for you!
  - Pure ES2017 `await` style code **with no callbacks used for routes or middleware** - Arc lambdas simply return HTTP responses, and middleware can be chained together by returning a response (ending processing) or a modified request (passing to the next step in middleware) 
  - [Svelte](https://svelte.dev/) using TypeScript, for fast, simple and small code without the overhead of a virtual DOM.
  - [eslint using TypeScript](https://github.com/typescript-eslint/typescript-eslint)
@@ -66,7 +66,7 @@ See the docs for [Architect Serverless](https://arc.codes/) and [Svelte](https:/
  - Frontend code, including Svelte components, is in `src/frontend`
  - Images and global CSS is in `public/images` and `public/css`
  - Backend code is in `src/http`, `src/ws`, code shred between all routes is in `src/shared` and `src/views`. If you make changes to `src/shared` and `src/views`, `scripts/update-shared-and-views.sh` will update the necessary symlinks for you.
- - Infrastructure (including routes, buckets, etc) is in `package.json` under the `arc` key.
+ - Infrastructure (including routes, buckets, etc) is in [package.json](package.json) under the `arc` key.
 
 ## Issues are welcome, but pull requests are better!
 
