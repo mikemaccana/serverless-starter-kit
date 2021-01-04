@@ -21,9 +21,11 @@ executors:
     docker:
       # The job's actual commands will run in the first image
       - image: cimg/node:lts
-      - image: cimg/mongo:4.4.2
+      # See https://circleci.com/docs/2.0/circleci-images/#mongodb
+      - image: circleci/mongo:4.4.2
 
         # Needed to pull down Mongo images from Docker hub
+        # See https://circleci.com/docs/2.0/private-images/
         # Get from https://hub.docker.com/
         # Set up at https://app.circleci.com/pipelines/github/mikemaccana/serverless-starter-kit
         auth:
