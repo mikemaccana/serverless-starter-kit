@@ -14,36 +14,3 @@ export interface Person extends Entity {
   passwordResetToken?: string;
   passwordResetTokenExpires?: number;
 }
-
-// -------------------
-// export interface Goal extends Entity {
-//   name: string;
-//   details: string;
-//   taskIDs: Task[];
-// }
-// -------------------
-// enum TaskAcceptance {
-
-// }
-
-enum TaskStatus {
-  Negotation = "NEGOTATION", // Default phase, negotation phase
-  Accepted = "ACCEPTED",
-  WorkingOnIt = "WORKING_ON_IT",
-  Rejected = "REJECTED",
-  Complete = "COMPLETE",
-  // If we get stuck, we send back to negotation or reject
-}
-
-// export interface Task extends Entity {
-//   name: string;
-//   details: string;
-//   goal: Goal;
-//   assignedBy: Person;
-//   assignments: PersonTaskAssignment[];
-// }
-
-// export interface PersonTaskAssignment extends Entity {
-//   assignedTo: Person;
-//   status: TaskStatus;
-// }
