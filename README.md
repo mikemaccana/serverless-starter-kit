@@ -74,4 +74,4 @@ Please don't just spam me asking for things.
 
 ## Changelog
 
-See [CHANGELOG.md]
+See [CHANGELOG.md](./changelog.md)
