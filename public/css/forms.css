@@ -1,0 +1,129 @@
+
+form {
+  width: 100%;
+  max-width: var(--single-column-threshold-width);
+  padding: calc(var(--spacing) * 2);
+  grid-gap: calc(var(--spacing) * 2);
+}
+
+/* Creates cool label-moves-when-active effect 
+See https://jonathan-harrell.com/advanced-css-form-styling/ */
+.input-and-label {
+  position: relative;
+  transition: all ease-in-out 0.1s;
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+button {
+  margin-bottom: var(--spacing);
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}
+
+
+/* Per Stripe docs https://stripe.com/docs/stripe-js/elements/quickstart
+"No CSS styles should be applied directly to anything Elements inserts inside your container DOM element. Style the container DOM element instead."
+*/
+input,
+select,
+textarea,
+.stripe-placeholder {
+  color: var(--text-color);
+  background-color: transparent;
+  width: 100%;
+  /* Space for label */
+  padding-top: calc(var(--spacing) * 3);
+  padding-right: 0;
+  padding-bottom: var(--spacing);
+  padding-left: var(--spacing);
+  /* Disable highlight halo */
+  outline: none;
+  font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	border: 1px solid #ccc;
+}
+
+
+input:disabled {
+	color: #ccc;
+}
+
+textarea {
+  font-family: sans-serif;
+  min-height: 100px;
+}
+
+/* Don't show label when input placeholder is shown */
+input:placeholder-shown + label,
+textarea:placeholder-shown + label,
+.StripeElement--empty + label {
+  opacity: 0;
+}
+
+/* When the placeholder is shown, use even padding on input (since label isn't shown )*/
+input:placeholder-shown,
+textarea:placeholder-shown,
+.StripeElement--empty {
+  padding: calc(var(--spacing) * 2) var(--spacing);
+}
+
+input:focus,
+.StripeElement--focus {
+  border-color: var(--brand-color);
+}
+
+.input-and-label label {
+  position: absolute;
+  top: 9px;
+  left: var(--spacing);
+  font-size: 8pt;
+  line-height: 8pt;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: all 0.2s ease-out;
+  color: var(--brand-color);
+}
+
+/* Disable ugly yellow on Webkit browsers after autofill */
+.StripeElement--webkit-autofill {
+  background-color: unset !important;
+}
+
+
+
+.input-and-label.checkbox {
+  display: grid;
+  justify-items: left;
+  grid-template-columns: calc(var(--spacing) * 3) auto;
+}
+
+input[type="checkbox"] {
+  margin: 10px 0 calc(var(--spacing) * 2) 0;
+}
+
+.input-and-label.checkbox label {
+  position: relative;
+  transform: none;
+  text-align: left;
+  padding: var(--spacing) 0;
+}
+
+.input-and-label:hover,
+button:hover,
+.button {
+  border-color: var(--good);
+}
