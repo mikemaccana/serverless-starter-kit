@@ -56,11 +56,14 @@ jobs:
           at: /home/circleci/project
       - run:
           name: Run tests
-          # Refresh apt, add the mongo CLI app, make a user, run the tests
+          # Refresh apt, add the mongo v4 CLI app, make a user, run the tests
+          # Official Ubuntu Mongo client is too old, produces warnings.
           # Environemnt variables configured at https://app.circleci.com/settings/project/github/mikemaccana/serverless-starter-kit/environment-variables
           command: |
+            wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
             sudo apt update
-            sudo apt install mongodb-clients
+            sudo apt install mongodb-org
             mongo --eval "db.createUser({ user: "${MONGODB_USER}", pwd: "${MONGODB_PASSWORD}", roles: [ { role: "userAdminAnyDatabase", db: "${MONGODB_DATABASE}" } ] })"
             npm run test
 
