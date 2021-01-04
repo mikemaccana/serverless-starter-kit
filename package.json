@@ -99,6 +99,7 @@
     "build-frontend": "rollup -c",
     "build-frontend-watch": "rollup -c -w",
     "update-shared-and-views": "bash scripts/update-shared-and-views.sh",
+    "update-shared-and-views-watch": "bash scripts/update-shared-and-views.sh watch",
     "sandbox": "arc sandbox",
     "push-to-aws": "arc deploy",
     "test": "jest",

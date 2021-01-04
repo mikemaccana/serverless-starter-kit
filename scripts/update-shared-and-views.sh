@@ -31,9 +31,11 @@ for DIR in 'shared' 'views'; do
   done
 done
 
-# Then watch for changes
-echo "Watching shared and views directories for changes..."
-inotifywait -q -m -e modify,create 'shared' 'views' | while read -r WATCHED_DIR EVENT FILENAME; do  
-  echo "${WATCHED_DIR} ${FILENAME}"
-  make-links $WATCHED_DIR $FILENAME
-done
+# Then watch for changes (if asked)
+if [ "$1" == "watch" ]; then
+  echo "Watching shared and views directories for changes..."
+  inotifywait -q -m -e modify,create 'shared' 'views' | while read -r WATCHED_DIR EVENT FILENAME; do  
+    echo "${WATCHED_DIR} ${FILENAME}"
+    make-links $WATCHED_DIR $FILENAME
+  done
+fi  

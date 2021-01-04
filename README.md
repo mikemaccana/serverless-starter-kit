@@ -65,7 +65,7 @@ See the docs for [Architect Serverless](https://arc.codes/) and [Svelte](https:/
 
  - **Frontend code**, including Svelte components, is in `src/frontend`
  - **Images and global CSS** is in `public/images` and `public/css`
- - **Backend code** is in `src/http`, `src/ws`, code shared between all routes is in `src/shared` and `src/views`. If you make changes to `src/shared` and `src/views`, `scripts/update-shared-and-views.sh` will update the necessary symlinks for you.
+ - **Backend code** is in `src/http`, `src/ws`, code shared between all routes is in `src/shared` and `src/views`. If you make changes to `src/shared` and `npm run update-shared-and-views` will update the necessary symlinks for you.
  - **Infrastructure** is in [package.json](./package.json) under the `arc` key. Arc organises these by familiar concepts - so each `http` route, for example, results in an API gateway with a Lambda attached when you deploy to AWS.
 
 ## Issues are welcome, but pull requests are better!

@@ -67,6 +67,7 @@ jobs:
             sudo apt update
             sudo apt install mongodb-org-shell
             mongo --eval "db.createUser({user: '$MONGODB_USER',pwd: '$MONGODB_PASSWORD', roles:[{role: 'userAdminAnyDatabase', db:'admin'}]})"
+            npm run update-shared-and-views
             npm run test
 
   lint code:
