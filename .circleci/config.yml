@@ -60,7 +60,7 @@ jobs:
           # Environemnt variables configured at https://app.circleci.com/settings/project/github/mikemaccana/serverless-starter-kit/environment-variables
           command: |
             sudo apt update
-            sudo apt install mongodb-org-shell
+            sudo apt install mongodb-clients
             mongo --eval "db.createUser({ user: "${MONGODB_USER}", pwd: "${MONGODB_PASSWORD}", roles: [ { role: "userAdminAnyDatabase", db: "${MONGODB_DATABASE}" } ] })"
             npm run test
 
