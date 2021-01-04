@@ -66,7 +66,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
             sudo apt update
             sudo apt install mongodb-org-shell
-            mongo --eval "db.createUser({ user: "${MONGODB_USER}", pwd: "${MONGODB_PASSWORD}", roles: [ { role: "userAdminAnyDatabase", db: "${MONGODB_DATABASE}" } ] })"
+            mongo --eval "db.createUser({ user: ${MONGODB_USER}, pwd: ${MONGODB_PASSWORD}, roles: [ { role: userAdminAnyDatabase, db: ${MONGODB_DATABASE} } ] })"
             npm run test
 
   lint code:
