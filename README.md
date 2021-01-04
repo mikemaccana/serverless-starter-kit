@@ -80,8 +80,9 @@ npm run deploy
 
 See the docs for [Architect Serverless](https://arc.codes/) and [Svelte](https://svelte.dev/)
 
- - Frontend code is in `src/frontend`
- - Backend code is is `src/http`, `src/ws`, `src/shared` and `src/views`. If you make changes to `src/shared` and `src/views`, `scripts/update-shared-and-views.sh` will update the necessary symlinks for you.
+ - Frontend code, including Svelte components, is in `src/frontend`
+ - Images and global CSS is in `public/images` and `public/css`
+ - Backend code is in `src/http`, `src/ws`, code shred between all routes is in `src/shared` and `src/views`. If you make changes to `src/shared` and `src/views`, `scripts/update-shared-and-views.sh` will update the necessary symlinks for you.
  - Infrastructure (including routes, buckets, etc) is in `package.json` under the `arc` key.
 
 ## Issues are welcome, but pull requests are better!
