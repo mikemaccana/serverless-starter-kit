@@ -1,15 +1,16 @@
-# Fullstack Serverless Starter Kit
+# Serverless Starter Kit
 
 <img alt="logos" src="/public/images/logos.svg"/>
 
  - [AWS SAM](https://aws.amazon.com/serverless/sam/)
- - Ne need to create `sam.yaml` files manually - [Architect Serverless](https://arc.codes) generates them for you. See `arc` in the `package.json` to see the input!
- - Pure ES2017 `await` style code without callbacks for routes or middleware - Arc lambdas simply return responses, and middleware can be chained together by returning a response (ending processing) or a modified request (passing to the next step in middleware) 
+ - No need to create `sam.yaml` files manually - [Architect Serverless](https://arc.codes) generates them for you. See `arc` in the `package.json`!
+ - Pure ES2017 `await` style code *with no callbacks used for routes or middleware* - Arc lambdas simply return responses, and middleware can be chained together by returning a response (ending processing) or a modified request (passing to the next step in middleware) 
  - [Svelte](https://svelte.dev/) using TypeScript, for fast, simple and small code without the overhead of a virtual DOM.
  - [eslint using TypeScript](https://github.com/typescript-eslint/typescript-eslint)
  - tests using [TS jest](https://kulshekhar.github.io/ts-jest/)
  - Types for the Arc `Request` and `Response` objects
  - An `.env` for secrets
+ - Users and passwords using bcrypt
  - A neat HTML5 view
  - Live Reloading
 
@@ -32,23 +33,29 @@ Config is under `.env`, which is not committed for security reasons.
 
 The browser will automatically reload when frontend assets are updated.
 
-## Coming next:
-
- - Add SCSS
- - Add Mongo Atlas (would use AWS DocumentDB but that requires paying for a DocumentDB EC2 instance which is absurdly expensive)
-
 # How to use this repository
 
 ## Clone it
 
 ```bash
-npx degit mikemaccana/fullstack-serverless-starter-kit my-new-app
+npx degit mikemaccana/serverless-starter-kit my-new-app
 cd my-new-app
 npm install
+```
+
+## Set up the DB
+
+Install MongoDB, then `cp .env.example .env` to make an env file. Then start MongoDB.
+
+## Start the app
+
+Just run:
+
+```
 npm start
 ```
 
-The Arc sandbox is now running on http://localhost:3333
+The [Architect sandbox](https://arc.codes/) is now running on http://localhost:3333
 ## Test
 
 ```bash
@@ -61,20 +68,6 @@ Or to run a single test suite or test:
 npm test-filter "Auth"
 ```
 
-## Make a DB user 
-
-Run 'mongo'
-
-```
-// Type 'mongo' to use
-use myapp
-db.createUser({
-  user: "admin",
-  pwd: "somepassword",
-  roles: [ { role: "readWrite", db: "myapp" }]
-})
-```
-
 ## Deploy the code to AWS
 
 Set up your `~/.aws/credentials` and run:
@@ -82,3 +75,19 @@ Set up your `~/.aws/credentials` and run:
 ```bash
 npm run deploy
 ```
+
+## Get started with Architect Serverless and Svelte
+
+See the docs for [Architect Serverless](https://arc.codes/) and [Svelte](https://svelte.dev/)
+
+ - Frontend code is in `src/frontend`
+ - Backend code is is `src/http`, `src/ws`, `src/shared` and `src/views`. If you make changes to `src/shared` and `src/views`, `scripts/update-shared-and-views.sh` will update the necessary symlinks for you.
+ - Infrastructure (including routes, buckets, etc) is in `package.json` under the `arc` key.
+
+## Issues are welcome, but pull requests are better!
+
+Please don't just spam me asking for things. 
+
+## Changelog
+
+See [CHANGELOG.md]

@@ -24,7 +24,7 @@ function getWebSocketURL() {
 }
 
 export function layoutPage({
-  title = "Fullstack Serverless Starter Kit",
+  title = "Serverless Starter Kit",
   serverVars = {},
 }: {
   title?: string;
