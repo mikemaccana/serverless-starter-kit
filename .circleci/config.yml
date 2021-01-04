@@ -22,6 +22,14 @@ executors:
       # The job's actual commands will run in the first image
       - image: cimg/node:lts
       - image: cimg/mongo:4.4.2
+
+        # Needed to pull down Mongo images from Docker hub
+        # Get from https://hub.docker.com/
+        # Set up at https://app.circleci.com/pipelines/github/mikemaccana/serverless-starter-kit
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+          
         environment:
           MONGODB_USER=test
           MONGODB_PASSWORD=test
