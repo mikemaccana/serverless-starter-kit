@@ -2,14 +2,21 @@
 form {
   width: 100%;
   display: grid;
+  justify-items: center;
   max-width: var(--single-column-threshold-width);
   padding: calc(var(--spacing) * 2);
   grid-gap: calc(var(--spacing) * 2);
 }
 
+/* Since we have grid-gap, items in the form don't need margins */
+form * {
+  margin: 0;
+}
+
 /* Display an inout box, with a label that only appears when the user is typing
-See https://jonathan-harrell.com/advanced-css-form-styling/ */
+See https://www.jonathan-harrell.com/blog/advanced-css-only-form-styling/ */
 .text-input-and-label {
+  width: 100%;
   position: relative;
   transition: all ease-in-out 0.1s;
 }
@@ -100,6 +107,7 @@ input:focus,
 }
 
 button {
+  width: fit-content;
   border: var(--border-width) solid var(--light-grey);
   padding: var(--spacing) calc(var(--spacing) * 2) ;
   margin: var(--spacing);

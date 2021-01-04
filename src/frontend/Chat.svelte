@@ -56,8 +56,6 @@
 
   <p>Type here, and a modified copy of the text will be replied from the server.</p>
 
-  
-
   <div class="text-input-and-label">
     <!-- svelte-ignore a11y-autofocus -->
     <input name="message" placeholder="Enter message" on:keyup={sendMessage} bind:value={composedMessage} autofocus>
