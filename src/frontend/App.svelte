@@ -15,7 +15,7 @@
 
 		<Route exact path="/" let:router>
 			<Nav />
-			<h1>Hello {name}</h1>
+			<h1 class="rainbow">{name}</h1>
 			<img alt="logos" src="{STATIC_DIR}/images/logos.svg"/>
 			<Chat />
 		</Route>
@@ -46,12 +46,7 @@
 		margin: 0;
 		text-align: center;
 		color: #ff784b;
-		font-size: 96pt;
-		/* Gradient text effect */
-		background-clip: text;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-image: linear-gradient(45deg, #ff784b 0%, #be2e2e 33%, #4328ab 66%, #0f2677 100%);
+		font-size: 64pt;
 		opacity: 0.8;
 	}
 

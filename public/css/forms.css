@@ -111,8 +111,8 @@ button {
   border: var(--border-width) solid var(--light-grey);
   padding: var(--spacing) calc(var(--spacing) * 2) ;
   margin: var(--spacing);
-	color: #333;
-	background-color: #f4f4f4;
+	color: var(--dark-grey);
+	background-color: var(--off-white);
   outline: none;
   font-family: inherit;
 	font-size: inherit;

@@ -4,7 +4,7 @@ import type ObjectLiteral from "./object-literal";
 const app = new App({
   target: document.body,
   props: {
-    name: "world",
+    name: "Serverless Starter Kit",
   },
 });
 

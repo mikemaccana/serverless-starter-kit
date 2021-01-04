@@ -8,5 +8,14 @@
 	--mid-blue: rgb(0,100,200);
 	--dark-grey: #333;
 	--black: #161616;
-  --scary-red: #b90f00;
+	--scary-red: #b90f00;
+	--rainbow: linear-gradient(45deg, #ff784b 0%, #be2e2e 33%, #4328ab 66%, #0f2677 100%);
+}
+
+:root .rainbow {
+	/* Gradient text effect */
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-image: linear-gradient(45deg, #ff784b 0%, #be2e2e 33%, #4328ab 66%, #0f2677 100%);
 }

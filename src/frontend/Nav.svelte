@@ -27,8 +27,8 @@
   nav {
     display: grid;
     position: absolute;
-    background-color: #212121;
-    color: white;
+    background-color: var(--dark-grey);
+    color: var(--white);;
     top: 0;
     width: 100vw;
     height: 96px;
@@ -37,7 +37,7 @@
     padding: 12px;
   } 
 
-  /* Global because our lLnk will be converted into an 'a' element */
+  /* Global because our link will be converted into an 'a' element */
   :global(nav a, nav a:visited, nav a:active, nav a:focus) {
     color: white;
   }
