@@ -63,7 +63,7 @@ jobs:
           name: Run tests
           # Add the mongo CLI app, make a user, run the tests
           command: |
-            apt install mongodb-org-shell
+            sudo apt install mongodb-org-shell
             mongo --eval 'db.createUser({ user: "test", pwd: "test", roles: [ { role: "userAdminAnyDatabase", db: "test" } ] })'
             npm run test
 
