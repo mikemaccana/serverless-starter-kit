@@ -30,6 +30,7 @@ function getMongoConnectionString(
 
 export function getDatabasenameForTests(): string {
   // 'expect' will be provided by tests
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (!(global as any).expect) {
     return null;
   }
