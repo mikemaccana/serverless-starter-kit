@@ -76,4 +76,4 @@ Please don't just spam me asking for features!
 
 ## Changelog
 
-See [CHANGELOG.md](./changelog.md)
+See [CHANGELOG.md](./CHANGELOG.md)
