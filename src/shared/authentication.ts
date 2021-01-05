@@ -18,12 +18,17 @@ import { DAY } from "./constants";
 const AMOUNT_OF_BCRYPT_ROUNDS = 4096;
 const BCRYPT_SALT_ROUNDS = Math.log2(AMOUNT_OF_BCRYPT_ROUNDS);
 
-export async function createPerson(
-  email: string,
-  givenName: string,
-  familyName: string,
-  password: string
-): Promise<Person> {
+export async function createPerson({
+  email,
+  givenName,
+  familyName,
+  password,
+}: {
+  email: string;
+  givenName: string;
+  familyName: string;
+  password: string;
+}): Promise<Person> {
   const person: Person = {
     email,
     givenName,
@@ -55,6 +60,13 @@ export async function _makeHashedPassword(
   return bcrypt.hash(plainTextPassword, BCRYPT_SALT_ROUNDS);
 }
 
+export async function _checkPassword(
+  plainTextPassword: string,
+  hashedPassword: string
+): Promise<boolean> {
+  return bcrypt.compare(plainTextPassword, hashedPassword);
+}
+
 // Shared functionality used when setting and resetting passwords
 async function _setPassword(
   database: Db,
@@ -62,7 +74,6 @@ async function _setPassword(
   suppliedPassword: string
 ): Promise<UpdateWriteOpResult> {
   const hashedPassword = await _makeHashedPassword(suppliedPassword);
-
   person.password = hashedPassword;
   person.passwordResetToken = null;
   person.passwordResetTokenExpires = null;
@@ -97,14 +108,16 @@ export async function resetPasswordWithToken(
     return person;
   });
 }
+
 export async function authenticate(
   person: Person,
   suggestedPassword: string
 ): Promise<boolean> {
   if (!person.password) {
+    log(`No password on person ${person.email}`);
     return null;
   }
-  return bcrypt.compare(suggestedPassword, person.password);
+  return _checkPassword(suggestedPassword, person.password);
 }
 
 export async function authenticateWithEmail(

@@ -4,21 +4,34 @@ import {
   makePasswordResetToken,
   resetPasswordWithToken,
   setPasswordResetToken,
+  _checkPassword,
+  _makeHashedPassword,
 } from "../authentication";
 import { SECONDS } from "../constants";
 import { Person } from "../person";
-import { getRandomUrlSafeString } from "../utils";
+import { getRandomUrlSafeString, log } from "../utils";
 
-const SECRET = "bananas";
+const PLAINTEXT_PASSWORD = "bananas";
 
 const newPassword = "ZOMG NEW PASSWORD";
 
 async function createDemoPerson() {
-  return createPerson("Joe", "Smith", "joe@smith.com", SECRET);
+  return createPerson({
+    email: "joe@smith.com",
+    givenName: "Joe",
+    familyName: "Smith",
+    password: PLAINTEXT_PASSWORD,
+  });
 }
 
 describe(`Authentication`, () => {
   let passwordResetToken: string | null = null;
+
+  test(`Basic bcrypt works`, async () => {
+    const hashedPassword = await _makeHashedPassword(PLAINTEXT_PASSWORD);
+    const result = await _checkPassword(PLAINTEXT_PASSWORD, hashedPassword);
+    expect(result).toBeTruthy();
+  });
 
   test(`Can get a random URL safe string`, async () => {
     const string: string = await getRandomUrlSafeString(69);
@@ -29,10 +42,10 @@ describe(`Authentication`, () => {
     const demoPerson: Person = await createDemoPerson();
     const successfulLoginResult: boolean = await authenticate(
       demoPerson,
-      SECRET
+      PLAINTEXT_PASSWORD
     );
-
     expect(successfulLoginResult).toBeTruthy();
+
     const badLoginResult: boolean = await authenticate(
       demoPerson,
       "WRONG PASSWORD"

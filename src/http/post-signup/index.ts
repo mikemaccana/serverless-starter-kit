@@ -10,7 +10,7 @@ async function handler(request: Request): Promise<Response> {
   const body: ObjectLiteral = request.body as ObjectLiteral;
   const { email, givenName, familyName, password } = body;
   log({ email, givenName, familyName, password });
-  const person = await createPerson(email, givenName, familyName, password);
+  const person = await createPerson({ email, givenName, familyName, password });
 
   log(`Created person in DB`, person);
   const cookie = await arc.http.session.write({ person });
