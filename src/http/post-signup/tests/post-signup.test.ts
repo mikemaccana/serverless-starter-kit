@@ -3,7 +3,6 @@ import sandbox from "@architect/sandbox";
 import { SECOND } from "@architect/shared/constants";
 import { log } from "@architect/shared/utils";
 import tiny from "tiny-json-http";
-// import { http } from "./modern-http";
 
 describe(`Can sign up`, () => {
   beforeAll(async () => {
@@ -22,7 +21,6 @@ describe(`Can sign up`, () => {
           familyName: "Testerson",
         },
       });
-      log(`RESPONSE`, response);
       expect(response.headers).toBeTruthy(); //.toMatchObject({});
     },
     1 * SECOND
