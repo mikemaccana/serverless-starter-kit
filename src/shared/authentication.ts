@@ -1,4 +1,4 @@
-import { Db, UpdateWriteOpResult } from "mongodb";
+import { Db, FindAndModifyWriteOpResultObject } from "mongodb";
 import { addOrUpdate, dbOperation } from "./documentdb";
 import { Person } from "./person";
 import uuid from "uuid";
@@ -40,11 +40,13 @@ export async function createPerson({
   };
 
   const person: Person = await dbOperation(async function (database) {
-    await addOrUpdate(database, "people", personOptions);
-    // TODO - make addOrUpdate return the created item so we don't have to do this
-    const person = await database.collection("people").findOne({ email });
-    await _setPassword(database, person, password);
-    return database.collection("people").findOne({ email });
+    const updatedResult = await addOrUpdate(database, "people", personOptions);
+    const setPasswordResult = await _setPassword(
+      database,
+      updatedResult as Person,
+      password
+    );
+    return setPasswordResult as Person;
   });
 
   return person;
@@ -74,7 +76,7 @@ async function _setPassword(
   database: Db,
   person: Person,
   suppliedPassword: string
-): Promise<UpdateWriteOpResult> {
+): Promise<FindAndModifyWriteOpResultObject<any>> {
   const hashedPassword = await _makeHashedPassword(suppliedPassword);
   person.password = hashedPassword;
   person.passwordResetToken = null;
@@ -85,7 +87,7 @@ async function _setPassword(
 export async function setPassword(
   person: Person,
   suppliedPassword: string
-): Promise<UpdateWriteOpResult> {
+): Promise<FindAndModifyWriteOpResultObject<any>> {
   return await dbOperation(async function (database) {
     return await _setPassword(database, person, suppliedPassword);
   });
@@ -152,7 +154,7 @@ async function _setPasswordResetToken(
   database: Db,
   person: Person,
   token: string
-): Promise<UpdateWriteOpResult> {
+): Promise<FindAndModifyWriteOpResultObject<any>> {
   const expiryDate = dateFromNowNumber(1 * DAY);
   person.passwordResetToken = token;
   person.passwordResetTokenExpires = expiryDate;
@@ -162,7 +164,7 @@ async function _setPasswordResetToken(
 export async function setPasswordResetToken(
   person: Person,
   token: string
-): Promise<UpdateWriteOpResult> {
+): Promise<FindAndModifyWriteOpResultObject<any>> {
   const expiryDate = dateFromNow(1 * DAY);
   return dbOperation(async function (database) {
     return _setPasswordResetToken(database, person, token);
@@ -172,7 +174,7 @@ export async function setPasswordResetToken(
 export async function setPasswordResetTokenForEmail(
   email: string,
   token: string
-): Promise<UpdateWriteOpResult> {
+): Promise<FindAndModifyWriteOpResultObject<any>> {
   return dbOperation(async function (database) {
     const person: Person = await database
       .collection("people")

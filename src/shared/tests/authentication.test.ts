@@ -38,7 +38,22 @@ describe(`Authentication`, () => {
     expect(string).toHaveLength(69);
   });
 
-  test(`can make a person with a hashed password`, async () => {
+  test(`can make a person`, async () => {
+    const demoPerson: Person = await createDemoPerson();
+    expect(demoPerson).toMatchObject({
+      _id: expect.any(String),
+      created: expect.any(Number),
+      email: "joe@smith.com",
+      familyName: "Smith",
+      givenName: "Joe",
+      password: expect.any(String),
+      passwordResetToken: null,
+      passwordResetTokenExpires: null,
+      updated: expect.any(Number),
+    });
+  });
+
+  test(`can login with a hashed password`, async () => {
     const demoPerson: Person = await createDemoPerson();
     const successfulLoginResult: boolean = await authenticate(
       demoPerson,

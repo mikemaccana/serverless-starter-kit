@@ -4,11 +4,12 @@ import {
   Db as Database,
   MongoClient,
   Cursor,
-  UpdateWriteOpResult,
+  FindAndModifyWriteOpResultObject,
 } from "mongodb";
 import { encode as encodeQueryString } from "querystring";
 import { ObjectLiteral } from "./utils";
 import path from "path";
+import { Person } from "./person";
 
 dotenv.config();
 
@@ -118,17 +119,21 @@ export async function addOrUpdate(
   database: Database,
   collection: string,
   document: ObjectLiteral
-): Promise<UpdateWriteOpResult> {
-  return database.collection(collection).updateOne(
+): Promise<ObjectLiteral> {
+  // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#findOneAndUpdate
+  const result = await database.collection(collection).findOneAndUpdate(
     {
       _id: document._id,
     },
-    // See https://docs.mongodb.com/manual/reference/operator/update/
     { $set: document },
     {
+      // ie, return the updated doc
+      returnOriginal: false,
       upsert: true,
     }
   );
+  // Actual document lives under 'value' key
+  return result.value;
 }
 
 export async function getAllDocuments(
