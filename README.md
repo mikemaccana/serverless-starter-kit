@@ -2,7 +2,7 @@
 
 <img alt="logos" src="/public/images/logos.svg"/>
 
-[![mikemaccana](https://circleci.com/gh/mikemaccana/serverless-starter-kit.svg?style=svg)](https://app.circleci.com/pipelines/github/mikemaccana/serverless-starter-kit)
+[![mikemaccana](https://circleci.com/gh/mikemaccana/serverless-starter-kit.svg?style=shield)](https://app.circleci.com/pipelines/github/mikemaccana/serverless-starter-kit)
 
  - [AWS SAM](https://aws.amazon.com/serverless/sam/)
  - [Architect Serverless](https://arc.codes)
