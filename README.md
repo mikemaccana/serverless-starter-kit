@@ -9,14 +9,14 @@
    - A full local AWS sandbox
    - Easily shared code between routes
    - Easly create AWS infrastructure - the `arc` in [package.json](./package.json) creates the AWS SAM `sam.yaml` file for you!
- - Pure ES2017 `await` style code **with no callbacks used for routes or middleware** - Arc lambdas simply return HTTP responses, and middleware can be chained together by returning a response (ending processing) or a modified request (passing to the next step in middleware) 
+   - Types are provided for the Arc `Request` and `Response` objects
+   - Pure ES2017 `await` style code **with no callbacks for routes or middleware** - Arc lambdas simply return HTTP responses, and middleware can be chained together by returning a response (ending processing) or a modified request (passing to the next step in middleware) 
  - [Svelte](https://svelte.dev/) using TypeScript, for fast, simple and small code without the overhead of a virtual DOM.
  - [eslint using TypeScript](https://github.com/typescript-eslint/typescript-eslint)
- - tests using [TS jest](https://kulshekhar.github.io/ts-jest/)
- - Types for the Arc `Request` and `Response` objects
- - An `.env` for secrets
+ - Tests using [TS jest](https://kulshekhar.github.io/ts-jest/) (and a ready to go config for Circle CI)
+ - An `.env` for secrets, which isn't committed for security reasons - keep it in your password manager.
  - Users and passwords using bcrypt
- - A neat HTML5 view
+ - A neat HTML5 page layout with CSS **grid by default**.
  - Live Reloading
 # How to use this repository
 
