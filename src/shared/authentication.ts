@@ -11,6 +11,7 @@ import {
   getRandomBytes,
   log,
   makeStringUrlSafe,
+  ObjectLiteral,
 } from "./utils";
 import { DAY } from "./constants";
 
@@ -29,7 +30,7 @@ export async function createPerson({
   familyName: string;
   password: string;
 }): Promise<Person> {
-  const person: Person = {
+  const personOptions: ObjectLiteral = {
     email,
     givenName,
     familyName,
@@ -38,14 +39,15 @@ export async function createPerson({
     updated: Date.now(),
   };
 
-  let updatedPerson: Person;
-  await dbOperation(async function (database) {
-    await addOrUpdate(database, "people", person);
+  const person: Person = await dbOperation(async function (database) {
+    await addOrUpdate(database, "people", personOptions);
+    // TODO - make addOrUpdate return the created item so we don't have to do this
+    const person = await database.collection("people").findOne({ email });
     await _setPassword(database, person, password);
-    updatedPerson = await database.collection("people").findOne({ email });
+    return database.collection("people").findOne({ email });
   });
 
-  return updatedPerson;
+  return person;
 }
 
 export async function getPersonByEmail(email: string): Promise<Person> {
