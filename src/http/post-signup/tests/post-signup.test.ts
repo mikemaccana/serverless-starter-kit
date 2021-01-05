@@ -25,4 +25,8 @@ describe(`Can sign up`, () => {
     },
     1 * SECOND
   );
+
+  afterAll(async () => {
+    await sandbox.end();
+  });
 });
