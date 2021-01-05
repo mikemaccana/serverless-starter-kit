@@ -23,6 +23,9 @@ executors:
     docker:
       # The job's actual commands will run in the first image
       - image: cimg/node:lts
+        environment:
+          # Silence sandbox https://github.com/architect/sandbox#environment-variables
+          ARC_QUIET: true
       # See https://circleci.com/docs/2.0/circleci-images/#mongodb
       - image: circleci/mongo:4.4.2
 

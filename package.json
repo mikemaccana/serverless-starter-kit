@@ -107,7 +107,8 @@
     "start": "run-p build-backend-watch build-frontend-watch sandbox",
     "deploy": "run-s build-backend build-frontend push-to-aws",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "validate": "svelte-check"
+    "check-circleci": " circleci config validate",
+    "check-svelte": "svelte-check"
   },
   "dependencies": {
     "@architect/architect": "^8.4.4",
