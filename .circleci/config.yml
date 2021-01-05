@@ -44,6 +44,10 @@ jobs:
       # Provided by the 'node' orb
       # See https://circleci.com/docs/2.0/orb-intro/
       - node/install-packages
+      - run:
+          name: Create symlinks
+          command: |
+            npm run update-shared-and-views
       # Save the checked out project and node_modules so we can make them available to all the other jobs
       - persist_to_workspace:
           root: /home/circleci/project
@@ -66,8 +70,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
             sudo apt update
             sudo apt install mongodb-org-shell
-            mongo --eval "db.createUser({user: '$MONGODB_USER',pwd: '$MONGODB_PASSWORD', roles:[{role: 'userAdminAnyDatabase', db:'admin'}]})"
-            npm run update-shared-and-views
+            mongo --eval "db.createUser({user: '$MONGODB_USER',pwd: '$MONGODB_PASSWORD', roles:[{role: 'userAdminAnyDatabase', db:'admin'}]})"    
             npm run test
 
   lint code:
