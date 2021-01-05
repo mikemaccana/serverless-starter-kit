@@ -9,14 +9,17 @@ import redirect from "@architect/shared/redirect";
 async function handler(request: Request): Promise<Response> {
   const body: ObjectLiteral = request.body as ObjectLiteral;
   const { email, givenName, familyName, password } = body;
-  log({ email, givenName, familyName, password });
+  [email, givenName, familyName, password].forEach(function (requiredString) {
+    if (!requiredString) {
+      throw new Error(`Missing required parameter`);
+    }
+  });
   const person = await createPerson({ email, givenName, familyName, password });
 
   log(`Created person in DB`, person);
   const cookie = await arc.http.session.write({ person });
   log(`Attached a person ${person._id} to the session.`);
   const response = redirect(config.loginRedirectURL, cookie);
-  log(`Response is`, response);
   log(`Redirecting...`);
   return response;
 }

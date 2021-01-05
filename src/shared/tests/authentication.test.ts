@@ -46,7 +46,8 @@ describe(`Authentication`, () => {
       email: "joe@smith.com",
       familyName: "Smith",
       givenName: "Joe",
-      password: expect.any(String),
+      // brcypt hashed passwords always include this
+      password: expect.stringContaining("$2b$12$"),
       passwordResetToken: null,
       passwordResetTokenExpires: null,
       updated: expect.any(Number),
