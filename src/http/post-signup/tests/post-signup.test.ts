@@ -1,12 +1,15 @@
 import sandbox from "@architect/sandbox";
 import { SECOND } from "@architect/shared/constants";
 import { postForm } from "@architect/shared/test-helpers";
-import { STATUSES } from "@architect/shared/utils";
+import {
+  getRandomPortNumberForSandbox,
+  STATUSES,
+} from "@architect/shared/utils";
 
 // See https://arc.codes/docs/en/guides/developer-experience/local-development
 describe(`Can sign up`, () => {
   beforeAll(async () => {
-    await sandbox.start();
+    await sandbox.start({ port: getRandomPortNumberForSandbox() });
   });
 
   test(

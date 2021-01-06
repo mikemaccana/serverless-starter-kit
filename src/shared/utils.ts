@@ -89,3 +89,16 @@ export interface ObjectLiteral {
   // eslint-disable-next-line
   [key: string]: any;
 }
+
+export function getRandomNumberBetween(
+  minimim: number,
+  maximum: number
+): number {
+  minimim = Math.ceil(minimim);
+  maximum = Math.floor(maximum);
+  return Math.floor(Math.random() * (maximum - minimim + 1)) + minimim;
+}
+
+export function getRandomPortNumberForSandbox(): number {
+  return getRandomNumberBetween(3000, 4000);
+}
