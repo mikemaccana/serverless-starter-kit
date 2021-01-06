@@ -19,9 +19,8 @@ async function handler(request: Request): Promise<Response> {
   log(`Created person in DB`, person);
   const cookie = await arc.http.session.write({ person });
   log(`Attached a person ${person._id} to the session.`);
-  const response = redirect(config.loginRedirectURL, cookie);
   log(`Redirecting...`);
-  return response;
+  return redirect(config.loginRedirectURL, cookie);
 }
 
 // Needed to decode form data
