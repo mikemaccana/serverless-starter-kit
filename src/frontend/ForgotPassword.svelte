@@ -9,7 +9,7 @@
 </style>
 
 <div class="dialog-page">
-  <form method="post" action={arcURL('/api/v1/forgot-password')}>
+  <form method="post" action={arcURL('/forgot')}>
 
     <a href="/">
       <img class="logo" alt="Logo" src={arcStatic('/images/logo.svg')} />

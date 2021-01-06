@@ -43,6 +43,12 @@
       },
       {
         "/forgot": {
+          "src": "dist/http/post-forgot",
+          "method": "post"
+        }
+      },
+      {
+        "/forgot": {
           "src": "dist/http/get-forgot",
           "method": "get"
         }
@@ -78,6 +84,11 @@
         }
       }
     ],
+    "events": {
+      "send-email": {
+        "src": "dist/events/send-email"
+      }
+    },
     "ws": {
       "connect": {
         "src": "dist/ws/connect"
@@ -120,6 +131,7 @@
     "@types/node-fetch": "^2.5.7",
     "bcrypt": "^5.0.0",
     "eslint-plugin-jest": "^24.1.3",
+    "html-to-text": "^6.0.0",
     "mongodb": "^3.6.3",
     "node-fetch": "^2.6.1",
     "npm-run-all": "^4.1.5",

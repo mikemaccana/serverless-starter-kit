@@ -4,6 +4,7 @@
 	import Chat from "./Chat.svelte"
 	import Nav from "./Nav.svelte"
 	import ForgotPassword from "./ForgotPassword.svelte"
+	import ForgotSent from "./ForgotSent.svelte"
 	import Login from "./Login.svelte"
 	import Signup from "./Signup.svelte"
 
@@ -27,6 +28,10 @@
 
 		<Route exact path="/forgot" let:router>
 			<ForgotPassword />
+		</Route>
+
+		<Route exact path="/forgot/sent" let:router>
+			<ForgotSent />
 		</Route>
 		
 		<Route exact path="/signup" let:router>

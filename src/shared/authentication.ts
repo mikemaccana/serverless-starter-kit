@@ -165,7 +165,6 @@ export async function setPasswordResetToken(
   person: Person,
   token: string
 ): Promise<FindAndModifyWriteOpResultObject<any>> {
-  const expiryDate = dateFromNow(1 * DAY);
   return dbOperation(async function (database) {
     return _setPasswordResetToken(database, person, token);
   });
