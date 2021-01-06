@@ -5,6 +5,7 @@ dotenv.config();
 
 // From https://app.sendgrid.com/guide/integrate/langs/nodejs
 import sendgridEmail from "@sendgrid/mail";
+import { log } from "./utils";
 sendgridEmail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const EMBARASSING_PATTERNS = [/\{/, /\}/, /\[object/];
@@ -61,6 +62,14 @@ export async function sendEmail({
     html,
     text,
   };
+  if (!config.isProduction) {
+    log(`Refusing to send email outside production`);
+    log(
+      `Would have sent email to '${recipient}', subject '${subject}', with body\n${text}`
+    );
+
+    return;
+  }
   try {
     await sendgridEmail.send(message);
   } catch (error) {
