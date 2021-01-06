@@ -6,12 +6,12 @@ import {
   STATUSES,
 } from "@architect/shared/utils";
 
-const PORT_FOR_SANDBOX = getRandomPortNumberForSandbox();
+const SANDBOX_PORT = getRandomPortNumberForSandbox();
 
 // See https://arc.codes/docs/en/guides/developer-experience/local-development
 describe(`Can sign up`, () => {
   beforeAll(async () => {
-    await sandbox.start({ port: PORT_FOR_SANDBOX });
+    await sandbox.start({ port: SANDBOX_PORT });
   });
 
   test(
@@ -19,7 +19,7 @@ describe(`Can sign up`, () => {
     async () => {
       expect.assertions(2);
       const response = await postForm(
-        `http://127.0.0.1:${PORT_FOR_SANDBOX}/signup`,
+        `http://127.0.0.1:${SANDBOX_PORT}/signup`,
         {
           email: "unittest@example.com",
           givenName: "Unit",
@@ -30,7 +30,7 @@ describe(`Can sign up`, () => {
 
       expect(response.status).toEqual(STATUSES.Found);
       expect(response.headers.get("location")).toEqual(
-        "http://127.0.0.1:3333/"
+        `http://127.0.0.1:${SANDBOX_PORT}/`
       );
     },
     1 * SECOND

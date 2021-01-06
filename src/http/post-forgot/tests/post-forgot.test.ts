@@ -7,12 +7,12 @@ import {
   STATUSES,
 } from "@architect/shared/utils";
 
-const PORT_FOR_SANDBOX = getRandomPortNumberForSandbox();
+const SANDBOX_PORT = getRandomPortNumberForSandbox();
 
 // See https://arc.codes/docs/en/guides/developer-experience/local-development
 describe(`Can reset forgotten password`, () => {
   beforeAll(async () => {
-    await sandbox.start({ port: PORT_FOR_SANDBOX });
+    await sandbox.start({ port: SANDBOX_PORT });
   });
 
   test(
@@ -26,7 +26,7 @@ describe(`Can reset forgotten password`, () => {
         password: "bananas",
       });
       const response = await postForm(
-        `http://127.0.0.1:${PORT_FOR_SANDBOX}/forgot`,
+        `http://127.0.0.1:${SANDBOX_PORT}/forgot`,
         {
           email: person.email,
         }
@@ -34,7 +34,7 @@ describe(`Can reset forgotten password`, () => {
 
       expect(response.status).toEqual(STATUSES.Found);
       expect(response.headers.get("location")).toEqual(
-        "http://127.0.0.1:3333/forgot/sent"
+        `http://127.0.0.1:${SANDBOX_PORT}/forgot/sent`
       );
     },
     2 * SECONDS
