@@ -6,7 +6,6 @@ dotenv.config();
 // From https://app.sendgrid.com/guide/integrate/langs/nodejs
 import sendgridEmail from "@sendgrid/mail";
 import { log } from "./utils";
-sendgridEmail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const EMBARASSING_PATTERNS = [/\{/, /\}/, /\[object/];
 
@@ -71,6 +70,7 @@ export async function sendEmail({
     return;
   }
   try {
+    sendgridEmail.setApiKey(process.env.SENDGRID_API_KEY);
     await sendgridEmail.send(message);
   } catch (error) {
     console.error(error);

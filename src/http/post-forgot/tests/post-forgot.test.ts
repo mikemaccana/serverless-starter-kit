@@ -32,8 +32,7 @@ describe(`Can reset forgotten password`, () => {
         }
       );
 
-      // TODO: should be Found (as we're returning a redirect). Investigate and fix.
-      expect(response.status).toEqual(STATUSES.OK);
+      expect(response.status).toEqual(STATUSES.Found);
       expect(response.headers.get("location")).toEqual(
         `http://127.0.0.1:${SANDBOX_PORT}/forgot/sent`
       );
